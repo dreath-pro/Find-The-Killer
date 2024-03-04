@@ -33,7 +33,7 @@ public class PlayerAdapter extends RecyclerView.Adapter<PlayerAdapter.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull PlayerAdapter.MyViewHolder holder, int position) {
         holder.name.setText(playerModels.get(position).getName());
-        holder.imageView.setImageResource(playerModels.get(position).getImage());
+        holder.imageView.setImageResource(playerModels.get(position).getStandImage());
     }
 
     @Override
