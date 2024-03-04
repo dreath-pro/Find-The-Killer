@@ -5,4 +5,7 @@
     <string name="start">Start</string>
     <string name="option">Option</string>
     <string name="quit">Quit</string>
+
+<!--    player name-->
+    <string name="name">Name</string>
 </resources>
