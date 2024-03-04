@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Find The Killer</string>
+
+<!--    buttons text-->
+    <string name="start">Start</string>
+    <string name="option">Option</string>
+    <string name="quit">Quit</string>
 </resources>
