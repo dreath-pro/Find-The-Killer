@@ -12,4 +12,9 @@
 <!--    lineup prompt-->
     <string name="prompt">There are no killer among them</string>
     <string name="skip_button">Skip</string>
+
+<!--    main game button text-->
+    <string name="inspect">Inspect</string>
+    <string name="guilty">Guilty</string>
+    <string name="ask">Ask</string>
 </resources>

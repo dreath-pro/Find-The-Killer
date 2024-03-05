@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class PlayerModel {
     private String name, gender, role;
     private int standImage, deadImage, closeupView;
+    private boolean isEliminated;
 
     public PlayerModel(String name, String gender, String role, int standImage, int deadImage, int closeupView) {
         this.name = name;
@@ -13,6 +14,7 @@ public class PlayerModel {
         this.standImage = standImage;
         this.deadImage = deadImage;
         this.closeupView = closeupView;
+        this.isEliminated = false;
     }
 
     public String getName() {
@@ -63,5 +65,13 @@ public class PlayerModel {
 
     public void setCloseupView(int closeupView) {
         this.closeupView = closeupView;
+    }
+
+    public boolean isEliminated() {
+        return isEliminated;
+    }
+
+    public void setEliminated(boolean eliminated) {
+        isEliminated = eliminated;
     }
 }

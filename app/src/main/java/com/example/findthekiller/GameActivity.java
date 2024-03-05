@@ -40,25 +40,12 @@ public class GameActivity extends AppCompatActivity {
 
     private void builderMessages()
     {
-        builder.append("Caleb: Huwa, what u do?" + "\n\n");
+        builder.append("Caleb: Huwa, what u do?");
         builder.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), 0, builder.length(), 0);
 
-        builder.append("Kiwi: Hey haha you are cute muah!" + "\n\n");
-        builder.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), builder.length() - 9, builder.length(), 0);
+        builder.append("\n\n");
 
-        builder.append("Kiwi: Hey haha you are cute muah!" + "\n\n");
-        builder.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), builder.length() - 9, builder.length(), 0);
-        builder.append("Kiwi: Hey haha you are cute muah!" + "\n\n");
-        builder.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), builder.length() - 9, builder.length(), 0);
-        builder.append("Kiwi: Hey haha you are cute muah!" + "\n\n");
-        builder.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), builder.length() - 9, builder.length(), 0);
-        builder.append("Kiwi: Hey haha you are cute muah!" + "\n\n");
-        builder.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), builder.length() - 9, builder.length(), 0);
-        builder.append("Kiwi: Hey haha you are cute muah!" + "\n\n");
-        builder.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), builder.length() - 9, builder.length(), 0);
-        builder.append("Kiwi: Hey haha you are cute muah!" + "\n\n");
-        builder.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), builder.length() - 9, builder.length(), 0);
-        builder.append("Kiwi: Hey haha you are cute muah!" + "\n\n");
+        builder.append("Kiwi: Hey haha you are cute muah! wanna play some other time caleb?");
         builder.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), builder.length() - 9, builder.length(), 0);
     }
 }

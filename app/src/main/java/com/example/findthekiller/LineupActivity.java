@@ -44,7 +44,7 @@ public class LineupActivity extends AppCompatActivity {
             int characterSelection = random.nextInt(character.size());
 
             playerModels.add(new PlayerModel(character.get(characterSelection).getName(), character.get(characterSelection).getGender(), null,
-                    character.get(characterSelection).getStandImage(), character.get(characterSelection).getDeadImage(), character.get(characterSelection).getCloseView()));
+                    character.get(characterSelection).getCloseView(), character.get(characterSelection).getDeadImage(), character.get(characterSelection).getCloseView()));
 
             character.remove(characterSelection);
         }
@@ -131,8 +131,10 @@ public class LineupActivity extends AppCompatActivity {
 
     private void addRoles()
     {
-        role.add("killer");
-        role.add("killer");
+        for(int i = 1; i <= 2; i++)
+        {
+            role.add("killer");
+        }
 
         for(int i = 0; i <= playerModels.size(); i++)
         {
@@ -142,13 +144,13 @@ public class LineupActivity extends AppCompatActivity {
     }
 
     private void addCharacter() {
-        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Dreath", "male"));
-        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Liam", "male"));
-        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Kiwi", "female"));
-        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Jade", "female"));
-        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Caleb", "male"));
-        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "John", "male"));
-        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Princess", "female"));
-        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Kaz", "female"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, "Dreath", "male"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, "Liam", "male"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, "Kiwi", "female"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, "Jade", "female"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, "Caleb", "male"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, "John", "male"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, "Princess", "female"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, "Kaz", "female"));
     }
 }

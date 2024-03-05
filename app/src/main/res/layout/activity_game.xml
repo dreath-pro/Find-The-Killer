@@ -4,26 +4,74 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/gameLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#A7A2BD">
 
-    <ScrollView
-        android:layout_width="313dp"
-        android:layout_height="227dp"
-        android:layout_marginBottom="44dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:background="#15141E"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:id="@+id/chatBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="48dp"
-            android:background="#252E40"
-            android:text=""
-            android:fontFamily="@font/nightcat"
-            android:textColor="#BEC9F1"
-            android:textSize="20sp" />
+        <ScrollView
+            android:layout_width="320dp"
+            android:layout_height="180dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp">
 
-    </ScrollView>
+            <TextView
+                android:id="@+id/chatBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#252E40"
+                android:text=""
+                android:textColor="#BEC9F1"
+                android:textSize="20sp" />
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/investigateButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/inspect"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:backgroundTint="#9DCCCC"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"/>
+
+            <Button
+                android:id="@+id/guiltyButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/guilty"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:backgroundTint="#F19AA7"
+                android:layout_gravity="center"/>
+
+            <Button
+                android:id="@+id/askButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ask"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:backgroundTint="#285C65"
+                android:layout_gravity="center"
+                android:layout_marginStart="10dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
