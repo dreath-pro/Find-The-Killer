@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
+    //female wearing spring outfit, cute webtoon aesthetic, simple color, matured face, white plain background
     Button startButton, optionButton, quitButton;
 
     @Override
