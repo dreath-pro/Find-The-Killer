@@ -1,6 +1,10 @@
 package com.example.findthekiller;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,11 +19,14 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class LineupActivity extends AppCompatActivity {
-    RecyclerView playerRecyclerView;
+    ArrayList<PlayerModel> playerModels = new ArrayList<>();
     ArrayList<Characters> character = new ArrayList<>();
+    ArrayList<String> role = new ArrayList<>();
     Random random = new Random();
 
-    ArrayList<PlayerModel> playerModels = new ArrayList<>();
+    RecyclerView playerRecyclerView;
+    TextView lineupPrompt;
+    Button skipButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,22 +35,62 @@ public class LineupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lineup);
 
         playerRecyclerView = findViewById(R.id.playerRecyclerView);
-        addImages();
+        lineupPrompt = findViewById(R.id.lineupPrompt);
+        skipButton = findViewById(R.id.skipButton);
 
-        for (int i = 0; i <= 14; i++) {
-            int selection = random.nextInt(character.size());
+        addCharacter();
+        for (int i = 0; i <= 7; i++) {
+            int characterSelection = random.nextInt(character.size());
 
-            playerModels.add(new PlayerModel(character.get(selection).getName(), character.get(selection).getGender(),
-                    character.get(selection).getStandImage(), character.get(selection).getDeadImage(), character.get(selection).getCloseView()));
+            playerModels.add(new PlayerModel(character.get(characterSelection).getName(), character.get(characterSelection).getGender(), null,
+                    character.get(characterSelection).getStandImage(), character.get(characterSelection).getDeadImage(), character.get(characterSelection).getCloseView()));
 
 //            character.remove(selection);
         }
 
+        addRoles();
+        int countKiller = 0;
+
+        int killerLength = 0;
+        for(String selectedRole : role)
+        {
+            if(selectedRole.equals("killer"))
+            {
+                killerLength++;
+            }
+        }
+
+        for(int i = 0; i <= killerLength - 1; i++)
+        {
+            int playerSelection = random.nextInt(playerModels.size());
+
+            playerModels.get(playerSelection).setRole(role.get(role.indexOf("killer")));
+            countKiller++;
+            role.remove("killer");
+        }
+
+        if(countKiller == 0)
+        {
+            lineupPrompt.setText("There are no killer among them");
+        }else if(countKiller == 1)
+        {
+            lineupPrompt.setText("There are " + countKiller + " killer among them");
+        }else if(countKiller > 1)
+        {
+            lineupPrompt.setText("There are " + countKiller + " killers among them");
+        }
+
         PlayerAdapter playerAdapter = new PlayerAdapter(this, playerModels);
         playerRecyclerView.setAdapter(playerAdapter);
-
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3, LinearLayoutManager.HORIZONTAL, false);
         playerRecyclerView.setLayoutManager(layoutManager);
+
+        skipButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LineupActivity.this, "Haha Skipped", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.lineupLayout), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -52,7 +99,19 @@ public class LineupActivity extends AppCompatActivity {
         });
     }
 
-    private void addImages() {
+    private void addRoles()
+    {
+        role.add("killer");
+        role.add("killer");
+
+        for(int i = 0; i <= playerModels.size(); i++)
+        {
+            role.add("family");
+            role.add("guest");
+        }
+    }
+
+    private void addCharacter() {
         character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Silver", "male"));
     }
 }

@@ -8,4 +8,8 @@
 
 <!--    player name-->
     <string name="name">Name</string>
+
+<!--    lineup prompt-->
+    <string name="prompt">There are 0 killers among them</string>
+    <string name="skip_button">Skip</string>
 </resources>

@@ -3,12 +3,13 @@ package com.example.findthekiller;
 import java.util.ArrayList;
 
 public class PlayerModel {
-    String name, gender;
-    int standImage, deadImage, closeupView;
+    private String name, gender, role;
+    private int standImage, deadImage, closeupView;
 
-    public PlayerModel(String name, String gender, int standImage, int deadImage, int closeupView) {
+    public PlayerModel(String name, String gender, String role, int standImage, int deadImage, int closeupView) {
         this.name = name;
         this.gender = gender;
+        this.role = role;
         this.standImage = standImage;
         this.deadImage = deadImage;
         this.closeupView = closeupView;
@@ -28,6 +29,16 @@ public class PlayerModel {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getRole()
+    {
+        return role;
+    }
+
+    public void setRole(String role)
+    {
+        this.role = role;
     }
 
     public int getStandImage() {
