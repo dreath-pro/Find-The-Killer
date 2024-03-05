@@ -63,10 +63,29 @@ public class LineupActivity extends AppCompatActivity {
         for(int i = 0; i <= killerLength - 1; i++)
         {
             int playerSelection = random.nextInt(playerModels.size());
+            while(playerModels.get(playerSelection).getRole() != null)
+            {
+                playerSelection = random.nextInt(playerModels.size());
+            }
 
             playerModels.get(playerSelection).setRole(role.get(role.indexOf("killer")));
             countKiller++;
             role.remove("killer");
+        }
+
+        for(PlayerModel playerModel : playerModels)
+        {
+            if(playerModel.getRole() == null)
+            {
+                int selectedRole = random.nextInt(2);
+                if(selectedRole == 0)
+                {
+                    playerModel.setRole(role.get(role.indexOf("family")));
+                }else
+                {
+                    playerModel.setRole(role.get(role.indexOf("guest")));
+                }
+            }
         }
 
         if(countKiller == 0)
@@ -85,10 +104,14 @@ public class LineupActivity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3, LinearLayoutManager.HORIZONTAL, false);
         playerRecyclerView.setLayoutManager(layoutManager);
 
+        character.clear();
+        role.clear();
+
         skipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(LineupActivity.this, "Haha Skipped", Toast.LENGTH_SHORT).show();
+                System.out.println(playerModels.get(0).getName());
             }
         });
 

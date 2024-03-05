@@ -10,6 +10,6 @@
     <string name="name">Name</string>
 
 <!--    lineup prompt-->
-    <string name="prompt">There are 0 killers among them</string>
+    <string name="prompt">There are no killer among them</string>
     <string name="skip_button">Skip</string>
 </resources>
