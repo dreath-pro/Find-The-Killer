@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,7 +39,7 @@ public class LineupActivity extends AppCompatActivity {
         skipButton = findViewById(R.id.skipButton);
 
         addCharacter();
-        for (int i = 0; i <= 7; i++) {
+        for (int i = 1; i <= 5; i++) {
             int characterSelection = random.nextInt(character.size());
 
             playerModels.add(new PlayerModel(character.get(characterSelection).getName(), character.get(characterSelection).getGender(), null,
@@ -144,13 +143,13 @@ public class LineupActivity extends AppCompatActivity {
     }
 
     private void addCharacter() {
-        character.add(new Characters(R.drawable.player, R.drawable.player, "Dreath", "male"));
-        character.add(new Characters(R.drawable.player, R.drawable.player, "Liam", "male"));
-        character.add(new Characters(R.drawable.player, R.drawable.player, "Kiwi", "female"));
-        character.add(new Characters(R.drawable.player, R.drawable.player, "Jade", "female"));
-        character.add(new Characters(R.drawable.player, R.drawable.player, "Caleb", "male"));
-        character.add(new Characters(R.drawable.player, R.drawable.player, "John", "male"));
-        character.add(new Characters(R.drawable.player, R.drawable.player, "Princess", "female"));
-        character.add(new Characters(R.drawable.player, R.drawable.player, "Kaz", "female"));
+        character.add(new Characters(R.drawable.james, R.drawable.james, "James", "male"));
+        character.add(new Characters(R.drawable.liam, R.drawable.liam, "Liam", "male"));
+        character.add(new Characters(R.drawable.rachel, R.drawable.rachel, "Rachel", "female"));
+        character.add(new Characters(R.drawable.jason, R.drawable.jason, "Jason", "male"));
+        character.add(new Characters(R.drawable.sarah, R.drawable.sarah, "Sarah", "female"));
+//        character.add(new Characters(R.drawable.player, R.drawable.player, "Kaz", "female"));
+//        character.add(new Characters(R.drawable.player, R.drawable.player, "Caleb", "male"));
+//        character.add(new Characters(R.drawable.player, R.drawable.player, "John", "male"));
     }
 }
