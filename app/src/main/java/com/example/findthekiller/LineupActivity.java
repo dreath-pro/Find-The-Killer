@@ -45,7 +45,7 @@ public class LineupActivity extends AppCompatActivity {
             playerModels.add(new PlayerModel(character.get(characterSelection).getName(), character.get(characterSelection).getGender(), null,
                     character.get(characterSelection).getStandImage(), character.get(characterSelection).getDeadImage(), character.get(characterSelection).getCloseView()));
 
-//            character.remove(selection);
+            character.remove(characterSelection);
         }
 
         addRoles();
@@ -111,7 +111,6 @@ public class LineupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(LineupActivity.this, "Haha Skipped", Toast.LENGTH_SHORT).show();
-                System.out.println(playerModels.get(0).getName());
             }
         });
 
@@ -135,6 +134,13 @@ public class LineupActivity extends AppCompatActivity {
     }
 
     private void addCharacter() {
-        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Silver", "male"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Dreath", "male"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Liam", "male"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Kiwi", "female"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Jade", "female"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Caleb", "male"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "John", "male"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Princess", "female"));
+        character.add(new Characters(R.drawable.player, R.drawable.player, R.drawable.player, "Kaz", "female"));
     }
 }
