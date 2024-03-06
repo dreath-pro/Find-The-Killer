@@ -22,7 +22,6 @@ public class GameActivity extends AppCompatActivity {
 
     SpannableStringBuilder builder = new SpannableStringBuilder();
     ArrayList<PlayerModel> playerModels = new ArrayList<>();
-    ArrayList<Characters> character = new ArrayList<>();
     RecyclerView playerInterrogation;
     Random random = new Random();
 
@@ -38,12 +37,7 @@ public class GameActivity extends AppCompatActivity {
         builderMessages();
         chatBox.setText(builder);
 
-        addCharacter();
-        for (int i = 0; i <= 7; i++) {
-            int characterSelection = random.nextInt(character.size());
-            playerModels.add(new PlayerModel(character.get(characterSelection).getName(), character.get(characterSelection).getGender(), null,
-                    character.get(characterSelection).getCloseView(), character.get(characterSelection).getDeadImage(), character.get(characterSelection).getCloseView()));
-        }
+        playerModels = getIntent().getParcelableArrayListExtra("playerModels");
 
         InterrogationAdapter interrogationAdapter = new InterrogationAdapter(this, playerModels);
         playerInterrogation.setAdapter(interrogationAdapter);
@@ -66,16 +60,5 @@ public class GameActivity extends AppCompatActivity {
 
         builder.append("Kiwi: Hey haha you are cute muah! wanna play some other time caleb?");
         builder.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), builder.length() - 9, builder.length(), 0);
-    }
-
-    private void addCharacter() {
-        character.add(new Characters(R.drawable.james, R.drawable.james, "James", "male"));
-        character.add(new Characters(R.drawable.liam, R.drawable.liam, "Liam", "male"));
-        character.add(new Characters(R.drawable.rachel, R.drawable.rachel, "Rachel", "female"));
-        character.add(new Characters(R.drawable.jason, R.drawable.jason, "Jason", "male"));
-        character.add(new Characters(R.drawable.sarah, R.drawable.sarah, "Sarah", "female"));
-//        character.add(new Characters(R.drawable.player, R.drawable.player, "Kaz", "female"));
-//        character.add(new Characters(R.drawable.player, R.drawable.player, "Caleb", "male"));
-//        character.add(new Characters(R.drawable.player, R.drawable.player, "John", "male"));
     }
 }

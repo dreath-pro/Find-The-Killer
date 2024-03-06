@@ -6,19 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class InterrogationAdapter extends RecyclerView.Adapter<InterrogationAdapter.MyViewHolder>
-{
+public class InterrogationAdapter extends RecyclerView.Adapter<InterrogationAdapter.MyViewHolder> {
     Context context;
     ArrayList<PlayerModel> playerModels;
 
-    public InterrogationAdapter(Context context, ArrayList<PlayerModel> playerModels)
-    {
+    public InterrogationAdapter(Context context, ArrayList<PlayerModel> playerModels) {
         this.context = context;
         this.playerModels = playerModels;
     }
@@ -34,7 +33,14 @@ public class InterrogationAdapter extends RecyclerView.Adapter<InterrogationAdap
     @Override
     public void onBindViewHolder(@NonNull InterrogationAdapter.MyViewHolder holder, int position) {
         holder.name.setText(playerModels.get(position).getName());
-        holder.image.setImageResource(playerModels.get(position).getStandImage());
+        holder.image.setImageResource(playerModels.get(position).getCloseupView());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Haha " + playerModels.get(holder.getAdapterPosition()).getName() + " selected", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -42,13 +48,11 @@ public class InterrogationAdapter extends RecyclerView.Adapter<InterrogationAdap
         return playerModels.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder
-    {
+    public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView image;
         TextView name;
 
-        public MyViewHolder(@NonNull View itemView)
-        {
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             image = itemView.findViewById(R.id.playerImage);

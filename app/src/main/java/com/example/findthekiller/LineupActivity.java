@@ -43,7 +43,7 @@ public class LineupActivity extends AppCompatActivity {
             int characterSelection = random.nextInt(character.size());
 
             playerModels.add(new PlayerModel(character.get(characterSelection).getName(), character.get(characterSelection).getGender(), null,
-                    character.get(characterSelection).getCloseView(), character.get(characterSelection).getDeadImage(), character.get(characterSelection).getCloseView()));
+                  character.get(characterSelection).getDeadImage(), character.get(characterSelection).getCloseView()));
 
             character.remove(characterSelection);
         }
@@ -125,6 +125,7 @@ public class LineupActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(getApplicationContext(), GameActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra("playerModels", playerModels);
         startActivity(intent);
     }
 
