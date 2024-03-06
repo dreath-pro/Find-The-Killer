@@ -24,7 +24,7 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
     TextView chatBox;
     TextView survivorNumber, killerNumber;
-    Button investigateButton, suspectButton, askButton, quitButton;
+    Button inspectButton, suspectButton, askButton, quitButton;
     private RecyclerView playerInterrogation;
 
     private SpannableStringBuilder builder = new SpannableStringBuilder();
@@ -34,7 +34,7 @@ public class GameActivity extends AppCompatActivity {
     private ArrayList<PlayerModel> playerModels = new ArrayList<>();
     private static PlayerModel selectedPlayer;
     private static int selectedIndex;
-    private int survivorCount = 0, killerCount = 0;
+    private int survivorCount, killerCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class GameActivity extends AppCompatActivity {
         chatBox = findViewById(R.id.chatBox);
         survivorNumber = findViewById(R.id.survivorNumber);
         killerNumber = findViewById(R.id.killerNumber);
-        investigateButton = findViewById(R.id.investigateButton);
+        inspectButton = findViewById(R.id.inspectButton);
         suspectButton = findViewById(R.id.suspectButton);
         askButton = findViewById(R.id.askButton);
         quitButton = findViewById(R.id.quitButton);
@@ -64,30 +64,52 @@ public class GameActivity extends AppCompatActivity {
         for (int i = 0; i <= playerModels.size() - 1; i++) {
             conversation.add(new SpannableStringBuilder());
             initializeGreeting(i);
-
-            if(playerModels.get(i).getRole().equals("killer"))
-            {
-                killerCount++;
-            }else
-            {
-                survivorCount++;
-            }
         }
-        survivorNumber.setText("" + survivorCount);
-        killerNumber.setText("" + killerCount);
         chatBox.setText(conversation.get(0));
+        updatePlayerCount(false);
 
-        investigateButton.setOnClickListener(new View.OnClickListener() {
+        inspectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(GameActivity.this, "The selected player is now: " + selectedPlayer.getName(), Toast.LENGTH_SHORT).show();
+
             }
         });
 
         suspectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(GameActivity.this, selectedPlayer.getName() + " is eliminated", Toast.LENGTH_SHORT).show();
+                playerModels.get(selectedIndex).setEliminated(true);
 
+                if(selectedPlayer.getRole().equals("killer"))
+                {
+                    Toast.makeText(GameActivity.this, selectedPlayer.getName() + " was the killer!", Toast.LENGTH_SHORT).show();
+                }else
+                {
+                    Toast.makeText(GameActivity.this, selectedPlayer.getName() + " is innocent!", Toast.LENGTH_SHORT).show();
+                }
+                updatePlayerCount(true);
+
+                indexValidation();
+                while(playerModels.get(selectedIndex).isEliminated())
+                {
+                    indexValidation();
+                }
+                selectedPlayer = playerModels.get(selectedIndex);
+                chatBox.setText(conversation.get(selectedIndex));
+
+                if(survivorCount <= 2)
+                {
+                    //triggers lose fragment
+                    Toast.makeText(GameActivity.this, "You Lose", Toast.LENGTH_SHORT).show();
+                    componentActivation(false);
+                }
+                if(killerCount == 0)
+                {
+                    //triggers win fragment
+                    Toast.makeText(GameActivity.this, "You Win", Toast.LENGTH_SHORT).show();
+                    componentActivation(false);
+                }
             }
         });
 
@@ -112,6 +134,68 @@ public class GameActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    private void componentActivation(boolean activate)
+    {
+        inspectButton.setEnabled(activate);
+        suspectButton.setEnabled(activate);
+        askButton.setEnabled(activate);
+        chatBox.setEnabled(activate);
+        playerInterrogation.setEnabled(activate);
+//        quitButton.setEnabled(activate);
+    }
+
+    private void indexValidation()
+    {
+        if((selectedIndex + 1) > (playerModels.size() - 1))
+        {
+            selectedIndex = 0;
+        }else
+        {
+            selectedIndex++;
+        }
+    }
+
+    public void updatePlayerCount(boolean toEliminate)
+    {
+        if(!toEliminate)
+        {
+            for(PlayerModel players : playerModels)
+            {
+                if(!players.isEliminated())
+                {
+                    if(players.getRole().equals("killer"))
+                    {
+                        killerCount++;
+                    }else
+                    {
+                        survivorCount++;
+                    }
+                }
+            }
+        }else
+        {
+            if(selectedPlayer.getRole().equals("killer"))
+            {
+                killerCount--;
+            }else
+            {
+                survivorCount--;
+            }
+
+            if(killerCount < 0)
+            {
+                killerCount = 0;
+            }
+            if(survivorCount < 0)
+            {
+                survivorCount = 0;
+            }
+        }
+
+        survivorNumber.setText("" + survivorCount);
+        killerNumber.setText("" + killerCount);
     }
 
     public void setSelectedPlayer(PlayerModel selectedPlayer) {

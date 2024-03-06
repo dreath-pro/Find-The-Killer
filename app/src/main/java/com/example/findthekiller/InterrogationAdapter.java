@@ -44,9 +44,15 @@ public class InterrogationAdapter extends RecyclerView.Adapter<InterrogationAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                gameActivity.setSelectedPlayer(playerModels.get(holder.getAdapterPosition()));
-                gameActivity.setSelectedIndex(holder.getAdapterPosition());
-                chatBox.setText(conversation.get(holder.getAdapterPosition()));
+                if(!playerModels.get(holder.getAdapterPosition()).isEliminated())
+                {
+                    gameActivity.setSelectedPlayer(playerModels.get(holder.getAdapterPosition()));
+                    gameActivity.setSelectedIndex(holder.getAdapterPosition());
+                    chatBox.setText(conversation.get(holder.getAdapterPosition()));
+                }else
+                {
+                    Toast.makeText(context, playerModels.get(holder.getAdapterPosition()).getName() + " is eliminated!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
