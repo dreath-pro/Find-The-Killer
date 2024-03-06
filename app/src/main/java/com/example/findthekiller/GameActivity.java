@@ -23,13 +23,15 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
     TextView chatBox;
     Button investigateButton, suspectButton, askButton;
+    private RecyclerView playerInterrogation;
 
     private SpannableStringBuilder builder = new SpannableStringBuilder();
+    private Random random = new Random();
+
     private ArrayList<SpannableStringBuilder> conversation = new ArrayList<>();
     private ArrayList<PlayerModel> playerModels = new ArrayList<>();
     private static PlayerModel selectedPlayer;
-    private RecyclerView playerInterrogation;
-    private Random random = new Random();
+    private static int selectedIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +53,11 @@ public class GameActivity extends AppCompatActivity {
         playerInterrogation.setLayoutManager(layoutManager);
 
         selectedPlayer = playerModels.get(0);
+        selectedIndex = 0;
 
-        for(int i = 0; i <= playerModels.size() - 1; i++)
-        {
+        for (int i = 0; i <= playerModels.size() - 1; i++) {
             conversation.add(new SpannableStringBuilder());
-            addConversation(i);
+            initializeGreeting(i);
         }
         chatBox.setText(conversation.get(0));
 
@@ -76,7 +78,7 @@ public class GameActivity extends AppCompatActivity {
         askButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                addQuestion(selectedIndex);
             }
         });
 
@@ -87,16 +89,27 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
-    public void setSelectedPlayer(PlayerModel selectedPlayer)
-    {
+    public void setSelectedPlayer(PlayerModel selectedPlayer) {
         GameActivity.selectedPlayer = selectedPlayer;
     }
 
-    private void addConversation(int selectedPlayer)
+    public void setSelectedIndex(int selectedIndex)
     {
+        GameActivity.selectedIndex = selectedIndex;
+    }
+
+    private void addQuestion(int selectedPlayer) {
+        conversation.get(selectedPlayer).append("You: Hey haha you are cute muah! wanna play some other time " + playerModels.get(selectedPlayer).getName() + "?");
+        conversation.get(selectedPlayer).setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, builder.length(), 0);
+
+        conversation.get(selectedPlayer).append("\n\n");
+
+        chatBox.setText(conversation.get(selectedIndex));
+    }
+
+    private void initializeGreeting(int selectedPlayer) {
         int selectGreeting = random.nextInt(6);
-        switch (selectGreeting)
-        {
+        switch (selectGreeting) {
             case 0:
                 conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Hi there, my name is " + playerModels.get(selectedPlayer).getName() + ". Feel free to ask me any questions!");
                 break;
@@ -116,10 +129,7 @@ public class GameActivity extends AppCompatActivity {
                 conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Yo, what's up? " + playerModels.get(selectedPlayer).getName() + " in the house, hit me up with your questions!");
                 break;
         }
-        conversation.get(selectedPlayer).setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), 0, builder.length(), 0);
+        conversation.get(selectedPlayer).setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, builder.length(), 0);
         conversation.get(selectedPlayer).append("\n\n");
-
-//        builder.append("Kiwi: Hey haha you are cute muah! wanna play some other time caleb?");
-//        builder.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), builder.length() - 9, builder.length(), 0);
     }
 }

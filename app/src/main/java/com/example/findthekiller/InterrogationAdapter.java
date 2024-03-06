@@ -45,6 +45,7 @@ public class InterrogationAdapter extends RecyclerView.Adapter<InterrogationAdap
             @Override
             public void onClick(View v) {
                 gameActivity.setSelectedPlayer(playerModels.get(holder.getAdapterPosition()));
+                gameActivity.setSelectedIndex(holder.getAdapterPosition());
                 chatBox.setText(conversation.get(holder.getAdapterPosition()));
             }
         });
