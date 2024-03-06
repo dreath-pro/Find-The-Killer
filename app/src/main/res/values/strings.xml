@@ -15,6 +15,6 @@
 
 <!--    main game button text-->
     <string name="inspect">Inspect</string>
-    <string name="guilty">Guilty</string>
+    <string name="guilty">Suspect</string>
     <string name="ask">Ask</string>
 </resources>

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class InterrogationAdapter extends RecyclerView.Adapter<InterrogationAdapter.MyViewHolder> {
     Context context;
     ArrayList<PlayerModel> playerModels;
+    GameActivity gameActivity = new GameActivity();
 
     public InterrogationAdapter(Context context, ArrayList<PlayerModel> playerModels) {
         this.context = context;
@@ -38,7 +39,7 @@ public class InterrogationAdapter extends RecyclerView.Adapter<InterrogationAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Haha " + playerModels.get(holder.getAdapterPosition()).getName() + " selected", Toast.LENGTH_SHORT).show();
+                gameActivity.setSelectedPlayer(playerModels.get(holder.getAdapterPosition()));
             }
         });
     }
