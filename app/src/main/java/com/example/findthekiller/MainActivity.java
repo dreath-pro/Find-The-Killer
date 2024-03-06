@@ -14,6 +14,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     //female wearing spring outfit, cute webtoon aesthetic, simple color, matured face, white plain background
+    //killer icon - https://www.flaticon.com/free-icon/serial-killer_1233003?term=killer&page=1&position=6&origin=search&related_id=1233003
+    //survivor icon - https://www.flaticon.com/free-icon/multiple-users-silhouette_33308?term=person&page=1&position=88&origin=search&related_id=33308
     Button startButton, guideButton, optionButton, quitButton;
 
     @Override

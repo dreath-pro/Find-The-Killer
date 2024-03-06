@@ -18,4 +18,7 @@
     <string name="inspect">Inspect</string>
     <string name="guilty">Suspect</string>
     <string name="ask">Ask</string>
+
+<!--    main game player status-->
+    <string name="number_of_players">0</string>
 </resources>

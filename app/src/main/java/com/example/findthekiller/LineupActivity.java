@@ -39,7 +39,7 @@ public class LineupActivity extends AppCompatActivity {
         skipButton = findViewById(R.id.skipButton);
 
         addCharacter();
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 7; i++) {
             int characterSelection = random.nextInt(character.size());
 
             playerModels.add(new PlayerModel(character.get(characterSelection).getName(), character.get(characterSelection).getGender(), null,
@@ -149,8 +149,8 @@ public class LineupActivity extends AppCompatActivity {
         character.add(new Characters(R.drawable.rachel, "Rachel", "female"));
         character.add(new Characters(R.drawable.jason, "Jason", "male"));
         character.add(new Characters(R.drawable.sarah, "Sarah", "female"));
-//        character.add(new Characters(R.drawable.player, R.drawable.player, "Kaz", "female"));
-//        character.add(new Characters(R.drawable.player, R.drawable.player, "Caleb", "male"));
+        character.add(new Characters(R.drawable.bianca, "Bianca", "female"));
+        character.add(new Characters(R.drawable.haileey, "Haileey", "female"));
 //        character.add(new Characters(R.drawable.player, R.drawable.player, "John", "male"));
     }
 }

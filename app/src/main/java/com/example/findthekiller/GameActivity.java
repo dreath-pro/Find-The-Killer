@@ -1,5 +1,6 @@
 package com.example.findthekiller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Layout;
 import android.text.SpannableStringBuilder;
@@ -22,7 +23,8 @@ import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
     TextView chatBox;
-    Button investigateButton, suspectButton, askButton;
+    TextView survivorNumber, killerNumber;
+    Button investigateButton, suspectButton, askButton, quitButton;
     private RecyclerView playerInterrogation;
 
     private SpannableStringBuilder builder = new SpannableStringBuilder();
@@ -32,6 +34,7 @@ public class GameActivity extends AppCompatActivity {
     private ArrayList<PlayerModel> playerModels = new ArrayList<>();
     private static PlayerModel selectedPlayer;
     private static int selectedIndex;
+    private int survivorCount = 0, killerCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +44,12 @@ public class GameActivity extends AppCompatActivity {
 
         playerInterrogation = findViewById(R.id.playerInterrogation);
         chatBox = findViewById(R.id.chatBox);
+        survivorNumber = findViewById(R.id.survivorNumber);
+        killerNumber = findViewById(R.id.killerNumber);
         investigateButton = findViewById(R.id.investigateButton);
         suspectButton = findViewById(R.id.suspectButton);
         askButton = findViewById(R.id.askButton);
+        quitButton = findViewById(R.id.quitButton);
 
         playerModels = getIntent().getParcelableArrayListExtra("playerModels");
 
@@ -58,7 +64,17 @@ public class GameActivity extends AppCompatActivity {
         for (int i = 0; i <= playerModels.size() - 1; i++) {
             conversation.add(new SpannableStringBuilder());
             initializeGreeting(i);
+
+            if(playerModels.get(i).getRole().equals("killer"))
+            {
+                killerCount++;
+            }else
+            {
+                survivorCount++;
+            }
         }
+        survivorNumber.setText("" + survivorCount);
+        killerNumber.setText("" + killerCount);
         chatBox.setText(conversation.get(0));
 
         investigateButton.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +95,15 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addQuestion(selectedIndex);
+            }
+        });
+
+        quitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -117,7 +142,7 @@ public class GameActivity extends AppCompatActivity {
                 conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Hey! I'm " + playerModels.get(selectedPlayer).getName() + ", here to answer any questions you might have.");
                 break;
             case 2:
-                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Hello, dear! " + playerModels.get(selectedPlayer).getName() + " here, ready for your curious inquiries.");
+                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Hello, there! " + playerModels.get(selectedPlayer).getName() + " here, ready for your curious inquiries.");
                 break;
             case 3:
                 conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Greetings! It's " + playerModels.get(selectedPlayer).getName() + ", feel free to shoot me any questions your heart desires.");
