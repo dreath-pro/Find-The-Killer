@@ -3,6 +3,7 @@
 
 <!--    buttons text-->
     <string name="start">Start</string>
+    <string name="guide">Guide</string>
     <string name="option">Option</string>
     <string name="quit">Quit</string>
 

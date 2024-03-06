@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
     //female wearing spring outfit, cute webtoon aesthetic, simple color, matured face, white plain background
-    Button startButton, optionButton, quitButton;
+    Button startButton, guideButton, optionButton, quitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         startButton = findViewById(R.id.startButton);
+        guideButton = findViewById(R.id.guideButton);
         optionButton = findViewById(R.id.optionButton);
         quitButton = findViewById(R.id.quitButton);
 
@@ -30,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 lineup();
+            }
+        });
+
+        guideButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Haha Jimhardcore", Toast.LENGTH_SHORT).show();
             }
         });
 
