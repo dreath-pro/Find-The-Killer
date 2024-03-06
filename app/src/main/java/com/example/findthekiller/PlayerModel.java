@@ -6,15 +6,14 @@ import java.util.ArrayList;
 
 public class PlayerModel implements Parcelable{
     private String name, gender, role;
-    private int deadImage, closeupView;
+    private int image;
     private boolean isEliminated;
 
-    public PlayerModel(String name, String gender, String role, int deadImage, int closeupView) {
+    public PlayerModel(String name, String gender, String role, int image) {
         this.name = name;
         this.gender = gender;
         this.role = role;
-        this.deadImage = deadImage;
-        this.closeupView = closeupView;
+        this.image = image;
         this.isEliminated = false;
     }
 
@@ -22,8 +21,7 @@ public class PlayerModel implements Parcelable{
         name = in.readString();
         gender = in.readString();
         role = in.readString();
-        deadImage = in.readInt();
-        closeupView = in.readInt();
+        image = in.readInt();
         isEliminated = in.readByte() != 0;
     }
 
@@ -32,8 +30,7 @@ public class PlayerModel implements Parcelable{
         dest.writeString(name);
         dest.writeString(gender);
         dest.writeString(role);
-        dest.writeInt(deadImage);
-        dest.writeInt(closeupView);
+        dest.writeInt(image);
         dest.writeByte((byte) (isEliminated ? 1 : 0));
     }
 
@@ -80,20 +77,12 @@ public class PlayerModel implements Parcelable{
         this.role = role;
     }
 
-    public int getDeadImage() {
-        return deadImage;
+    public int getImage() {
+        return image;
     }
 
-    public void setDeadImage(int deadImage) {
-        this.deadImage = deadImage;
-    }
-
-    public int getCloseupView() {
-        return closeupView;
-    }
-
-    public void setCloseupView(int closeupView) {
-        this.closeupView = closeupView;
+    public void setImage(int image) {
+        this.image = image;
     }
 
     public boolean isEliminated() {

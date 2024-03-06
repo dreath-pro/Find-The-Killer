@@ -25,6 +25,7 @@ public class GameActivity extends AppCompatActivity {
     Button investigateButton, suspectButton, askButton;
 
     private SpannableStringBuilder builder = new SpannableStringBuilder();
+    private ArrayList<SpannableStringBuilder> conversation = new ArrayList<>();
     private ArrayList<PlayerModel> playerModels = new ArrayList<>();
     private static PlayerModel selectedPlayer;
     private RecyclerView playerInterrogation;
@@ -42,17 +43,21 @@ public class GameActivity extends AppCompatActivity {
         suspectButton = findViewById(R.id.suspectButton);
         askButton = findViewById(R.id.askButton);
 
-        builderMessages();
-        chatBox.setText(builder);
-
         playerModels = getIntent().getParcelableArrayListExtra("playerModels");
 
-        InterrogationAdapter interrogationAdapter = new InterrogationAdapter(this, playerModels);
+        InterrogationAdapter interrogationAdapter = new InterrogationAdapter(this, playerModels, chatBox, conversation);
         playerInterrogation.setAdapter(interrogationAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         playerInterrogation.setLayoutManager(layoutManager);
 
         selectedPlayer = playerModels.get(0);
+
+        for(int i = 0; i <= playerModels.size() - 1; i++)
+        {
+            conversation.add(new SpannableStringBuilder());
+            addConversation(i);
+        }
+        chatBox.setText(conversation.get(0));
 
         investigateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,17 +89,37 @@ public class GameActivity extends AppCompatActivity {
 
     public void setSelectedPlayer(PlayerModel selectedPlayer)
     {
-        this.selectedPlayer = selectedPlayer;
+        GameActivity.selectedPlayer = selectedPlayer;
     }
 
-    private void builderMessages()
+    private void addConversation(int selectedPlayer)
     {
-        builder.append("Caleb: Huwa, what u do?");
-        builder.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), 0, builder.length(), 0);
+        int selectGreeting = random.nextInt(6);
+        switch (selectGreeting)
+        {
+            case 0:
+                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Hi there, my name is " + playerModels.get(selectedPlayer).getName() + ". Feel free to ask me any questions!");
+                break;
+            case 1:
+                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Hey! I'm " + playerModels.get(selectedPlayer).getName() + ", here to answer any questions you might have.");
+                break;
+            case 2:
+                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Hello, dear! " + playerModels.get(selectedPlayer).getName() + " here, ready for your curious inquiries.");
+                break;
+            case 3:
+                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Greetings! It's " + playerModels.get(selectedPlayer).getName() + ", feel free to shoot me any questions your heart desires.");
+                break;
+            case 4:
+                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Hi there, " + playerModels.get(selectedPlayer).getName() + " at your service! Ask away, and let's have a chat.");
+                break;
+            case 5:
+                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Yo, what's up? " + playerModels.get(selectedPlayer).getName() + " in the house, hit me up with your questions!");
+                break;
+        }
+        conversation.get(selectedPlayer).setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE), 0, builder.length(), 0);
+        conversation.get(selectedPlayer).append("\n\n");
 
-        builder.append("\n\n");
-
-        builder.append("Kiwi: Hey haha you are cute muah! wanna play some other time caleb?");
-        builder.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), builder.length() - 9, builder.length(), 0);
+//        builder.append("Kiwi: Hey haha you are cute muah! wanna play some other time caleb?");
+//        builder.setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), builder.length() - 9, builder.length(), 0);
     }
 }

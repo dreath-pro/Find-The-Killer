@@ -1,7 +1,7 @@
 package com.example.findthekiller;
 
 public class Characters {
-    private int deadImage, closeView;
+    private int image;
     private String name, gender;
 
     public Characters()
@@ -9,27 +9,18 @@ public class Characters {
 
     }
 
-    public Characters(int deadImage, int closeView, String name, String gender) {
-        this.deadImage = deadImage;
-        this.closeView = closeView;
+    public Characters(int image, String name, String gender) {
+        this.image = image;
         this.name = name;
         this.gender = gender;
     }
 
-    public int getDeadImage() {
-        return deadImage;
+    public int getImage() {
+        return image;
     }
 
-    public void setDeadImage(int deadImage) {
-        this.deadImage = deadImage;
-    }
-
-    public int getCloseView() {
-        return closeView;
-    }
-
-    public void setCloseView(int closeView) {
-        this.closeView = closeView;
+    public void setImage(int image) {
+        this.image = image;
     }
 
     public String getName() {
