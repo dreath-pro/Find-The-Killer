@@ -54,7 +54,7 @@ public class LineupActivity extends AppCompatActivity {
         int killerLength = 0;
         for(String selectedRole : role)
         {
-            if(selectedRole.equals("killer"))
+            if(selectedRole.equals("Killer"))
             {
                 killerLength++;
             }
@@ -68,9 +68,9 @@ public class LineupActivity extends AppCompatActivity {
                 playerSelection = random.nextInt(playerModels.size());
             }
 
-            playerModels.get(playerSelection).setRole(role.get(role.indexOf("killer")));
+            playerModels.get(playerSelection).setRole(role.get(role.indexOf("Killer")));
             countKiller++;
-            role.remove("killer");
+            role.remove("Killer");
         }
 
         for(PlayerModel playerModel : playerModels)
@@ -80,10 +80,10 @@ public class LineupActivity extends AppCompatActivity {
                 int selectedRole = random.nextInt(2);
                 if(selectedRole == 0)
                 {
-                    playerModel.setRole(role.get(role.indexOf("family")));
+                    playerModel.setRole(role.get(role.indexOf("Family")));
                 }else
                 {
-                    playerModel.setRole(role.get(role.indexOf("guest")));
+                    playerModel.setRole(role.get(role.indexOf("Guest")));
                 }
             }
         }
@@ -133,44 +133,44 @@ public class LineupActivity extends AppCompatActivity {
     {
         for(int i = 1; i <= 4; i++)
         {
-            role.add("killer");
+            role.add("Killer");
         }
 
         for(int i = 0; i <= playerModels.size(); i++)
         {
-            role.add("family");
-            role.add("guest");
+            role.add("Family");
+            role.add("Guest");
         }
     }
 
     private void addCharacter() {
-        character.add(new Characters(R.drawable.alice, "Alice", "female"));
-        character.add(new Characters(R.drawable.alisson, "Alisson", "female"));
-        character.add(new Characters(R.drawable.angel, "Angel", "female"));
-        character.add(new Characters(R.drawable.bianca, "Bianca", "female"));
-        character.add(new Characters(R.drawable.bryan, "Bryan", "male"));
-        character.add(new Characters(R.drawable.cherry, "Cherry", "female"));
-        character.add(new Characters(R.drawable.fatima, "Fatima", "female"));
-        character.add(new Characters(R.drawable.francis, "Francis", "female"));
-        character.add(new Characters(R.drawable.fritz, "Fritz", "male"));
-        character.add(new Characters(R.drawable.jacob, "Jacob", "male"));
-        character.add(new Characters(R.drawable.james, "James", "male"));
-        character.add(new Characters(R.drawable.john, "John", "male"));
-        character.add(new Characters(R.drawable.juliet, "Juliet", "female"));
-        character.add(new Characters(R.drawable.kimberly, "Kimberly", "female"));
-        character.add(new Characters(R.drawable.kyle, "Kyle", "male"));
-        character.add(new Characters(R.drawable.lee, "Lee", "male"));
-        character.add(new Characters(R.drawable.liam, "Liam", "male"));
-        character.add(new Characters(R.drawable.louise, "Louise", "female"));
-        character.add(new Characters(R.drawable.merry, "Merry", "female"));
-        character.add(new Characters(R.drawable.nicolas, "Nicolas", "male"));
-        character.add(new Characters(R.drawable.rachel, "Rachel", "female"));
-        character.add(new Characters(R.drawable.sarah, "Sarah", "female"));
-        character.add(new Characters(R.drawable.sasa, "Sasa", "female"));
-        character.add(new Characters(R.drawable.steve, "Steve", "male"));
-        character.add(new Characters(R.drawable.venus, "Venus", "female"));
-        character.add(new Characters(R.drawable.vince, "Vince", "male"));
-        character.add(new Characters(R.drawable.ryan, "Ryan", "male"));
-        character.add(new Characters(R.drawable.elize, "Elize", "female"));
+        character.add(new Characters(R.drawable.alice, "Alice", "Female"));
+        character.add(new Characters(R.drawable.alisson, "Alisson", "Female"));
+        character.add(new Characters(R.drawable.angel, "Angel", "Female"));
+        character.add(new Characters(R.drawable.bianca, "Bianca", "Female"));
+        character.add(new Characters(R.drawable.bryan, "Bryan", "Male"));
+        character.add(new Characters(R.drawable.cherry, "Cherry", "Female"));
+        character.add(new Characters(R.drawable.fatima, "Fatima", "Female"));
+        character.add(new Characters(R.drawable.francis, "Francis", "Female"));
+        character.add(new Characters(R.drawable.fritz, "Fritz", "Male"));
+        character.add(new Characters(R.drawable.jacob, "Jacob", "Male"));
+        character.add(new Characters(R.drawable.james, "James", "Male"));
+        character.add(new Characters(R.drawable.john, "John", "Male"));
+        character.add(new Characters(R.drawable.juliet, "Juliet", "Female"));
+        character.add(new Characters(R.drawable.kimberly, "Kimberly", "Female"));
+        character.add(new Characters(R.drawable.kyle, "Kyle", "Male"));
+        character.add(new Characters(R.drawable.lee, "Lee", "Male"));
+        character.add(new Characters(R.drawable.liam, "Liam", "Male"));
+        character.add(new Characters(R.drawable.louise, "Louise", "Female"));
+        character.add(new Characters(R.drawable.merry, "Merry", "Female"));
+        character.add(new Characters(R.drawable.nicolas, "Nicolas", "Male"));
+        character.add(new Characters(R.drawable.rachel, "Rachel", "Female"));
+        character.add(new Characters(R.drawable.sarah, "Sarah", "Female"));
+        character.add(new Characters(R.drawable.sasa, "Sasa", "Female"));
+        character.add(new Characters(R.drawable.steve, "Steve", "Male"));
+        character.add(new Characters(R.drawable.venus, "Venus", "Female"));
+        character.add(new Characters(R.drawable.vince, "Vince", "Male"));
+        character.add(new Characters(R.drawable.ryan, "Ryan", "Male"));
+        character.add(new Characters(R.drawable.elize, "Elize", "Female"));
     }
 }

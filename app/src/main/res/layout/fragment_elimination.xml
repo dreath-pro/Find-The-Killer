@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EliminationFragment"
+    android:background="#303842">
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="20sp"
+        android:fontFamily="@font/nightcat"
+        android:paddingStart="30sp"
+        android:paddingEnd="30sp"
+        android:backgroundTint="#3E498C"
+        android:textColor="@color/white"
+        android:text="Back"
+        android:textSize="30sp"/>
+
+    <LinearLayout
+        android:id="@+id/playerStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/playerImage"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/player"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:id="@+id/resultPrompt"
+            android:layout_marginTop="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/result_prompt"
+            android:textSize="30sp"
+            android:layout_gravity="center"
+            android:textColor="#2FC8CD"/>
+
+        <LinearLayout
+            android:id="@+id/playerDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="40sp"
+            android:layout_gravity="center">
+
+            <LinearLayout
+                android:id="@+id/indicators"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:layout_marginEnd="35sp">
+
+                <TextView
+                    android:id="@+id/nameIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name_indicator"
+                    android:textSize="28sp"
+                    android:layout_marginTop="25sp"
+                    android:layout_gravity="center"
+                    android:textColor="#A7C0EC"/>
+
+                <TextView
+                    android:id="@+id/genderIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender_indicator"
+                    android:textSize="28sp"
+                    android:layout_marginTop="25sp"
+                    android:layout_gravity="center"
+                    android:textColor="#A7C0EC"/>
+
+                <TextView
+                    android:id="@+id/roleIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/role_indicator"
+                    android:textSize="28sp"
+                    android:layout_marginTop="25sp"
+                    android:layout_gravity="center"
+                    android:textColor="#A7C0EC"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/playerName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/player_name"
+                    android:textSize="28sp"
+                    android:layout_marginTop="25sp"
+                    android:layout_gravity="center"
+                    android:textColor="#A7C0EC"/>
+
+                <TextView
+                    android:id="@+id/playerGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/player_gender"
+                    android:textSize="28sp"
+                    android:layout_marginTop="25sp"
+                    android:layout_gravity="center"
+                    android:textColor="#A7C0EC"/>
+
+                <TextView
+                    android:id="@+id/playerRole"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/player_role"
+                    android:textSize="28sp"
+                    android:layout_marginTop="25sp"
+                    android:layout_gravity="center"
+                    android:textColor="#A7C0EC"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

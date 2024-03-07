@@ -11,10 +11,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,7 +40,7 @@ public class GameActivity extends AppCompatActivity {
     private int survivorCount, killerCount;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_game);
@@ -78,38 +81,31 @@ public class GameActivity extends AppCompatActivity {
         suspectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(GameActivity.this, selectedPlayer.getName() + " is eliminated", Toast.LENGTH_SHORT).show();
                 playerModels.get(selectedIndex).setEliminated(true);
                 interrogationAdapter.notifyItemChanged(selectedIndex);
 
-                if(selectedPlayer.getRole().equals("killer"))
-                {
-                    Toast.makeText(GameActivity.this, selectedPlayer.getName() + " was the killer!", Toast.LENGTH_SHORT).show();
-                }else
-                {
-                    Toast.makeText(GameActivity.this, selectedPlayer.getName() + " is innocent!", Toast.LENGTH_SHORT).show();
-                }
                 updatePlayerCount(true);
-
-                indexValidation();
-                while(playerModels.get(selectedIndex).isEliminated())
-                {
-                    indexValidation();
-                }
-                selectedPlayer = playerModels.get(selectedIndex);
-                chatBox.setText(conversation.get(selectedIndex));
-
                 if(survivorCount <= 2)
                 {
                     //triggers lose fragment
                     Toast.makeText(GameActivity.this, "You Lose", Toast.LENGTH_SHORT).show();
                     componentActivation(false);
-                }
-                if(killerCount == 0)
+                }else if(killerCount == 0)
                 {
                     //triggers win fragment
                     Toast.makeText(GameActivity.this, "You Win", Toast.LENGTH_SHORT).show();
                     componentActivation(false);
+                }else
+                {
+                    showSuspectResult();
+
+                    indexValidation();
+                    while(playerModels.get(selectedIndex).isEliminated())
+                    {
+                        indexValidation();
+                    }
+                    selectedPlayer = playerModels.get(selectedIndex);
+                    chatBox.setText(conversation.get(selectedIndex));
                 }
             }
         });
@@ -137,14 +133,31 @@ public class GameActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed()
+    {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    private void showSuspectResult()
+    {
+        Fragment eliminationFragment = new EliminationFragment(selectedPlayer);
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.gameLayout, eliminationFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
     private void componentActivation(boolean activate)
     {
         inspectButton.setEnabled(activate);
         suspectButton.setEnabled(activate);
         askButton.setEnabled(activate);
-        chatBox.setEnabled(activate);
-        playerInterrogation.setEnabled(activate);
-//        quitButton.setEnabled(activate);
     }
 
     private void indexValidation()
@@ -166,7 +179,7 @@ public class GameActivity extends AppCompatActivity {
             {
                 if(!players.isEliminated())
                 {
-                    if(players.getRole().equals("killer"))
+                    if(players.getRole().equals("Killer"))
                     {
                         killerCount++;
                     }else
@@ -177,7 +190,7 @@ public class GameActivity extends AppCompatActivity {
             }
         }else
         {
-            if(selectedPlayer.getRole().equals("killer"))
+            if(selectedPlayer.getRole().equals("Killer"))
             {
                 killerCount--;
             }else

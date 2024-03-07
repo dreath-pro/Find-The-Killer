@@ -1,24 +1,36 @@
 <resources>
     <string name="app_name">Find The Killer</string>
 
-<!--    buttons text-->
+    <!--    buttons text-->
     <string name="start">Start</string>
     <string name="guide">Guide</string>
     <string name="option">Option</string>
     <string name="quit">Quit</string>
 
-<!--    player name-->
+    <!--    player name-->
     <string name="name">Name</string>
 
-<!--    lineup prompt-->
+    <!--    lineup prompt-->
     <string name="prompt">There are no killer among them</string>
     <string name="skip_button">Skip</string>
 
-<!--    main game button text-->
+    <!--    main game button text-->
     <string name="inspect">Inspect</string>
     <string name="guilty">Suspect</string>
     <string name="ask">Ask</string>
 
-<!--    main game player status-->
+    <!--    main game player status-->
     <string name="number_of_players">0</string>
+
+<!--    fragment player details-->
+    <string name="result_prompt">Player is Eliminated!</string>
+
+    <string name="name_indicator">Name:</string>
+    <string name="player_name">Player</string>
+
+    <string name="gender_indicator">Gender:</string>
+    <string name="player_gender">Male</string>
+
+    <string name="role_indicator">Role: </string>
+    <string name="player_role">Family</string>
 </resources>
