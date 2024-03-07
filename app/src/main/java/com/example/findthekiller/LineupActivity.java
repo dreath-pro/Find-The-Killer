@@ -39,7 +39,7 @@ public class LineupActivity extends AppCompatActivity {
         skipButton = findViewById(R.id.skipButton);
 
         addCharacter();
-        for (int i = 1; i <= 8; i++) {
+        for (int i = 1; i <= 16; i++) {
             int characterSelection = random.nextInt(character.size());
 
             playerModels.add(new PlayerModel(character.get(characterSelection).getName(), character.get(characterSelection).getGender(), null,
@@ -131,7 +131,7 @@ public class LineupActivity extends AppCompatActivity {
 
     private void addRoles()
     {
-        for(int i = 1; i <= 2; i++)
+        for(int i = 1; i <= 4; i++)
         {
             role.add("killer");
         }

@@ -53,7 +53,7 @@ public class GameActivity extends AppCompatActivity {
 
         playerModels = getIntent().getParcelableArrayListExtra("playerModels");
 
-        InterrogationAdapter interrogationAdapter = new InterrogationAdapter(this, playerModels, chatBox, conversation);
+        InterrogationAdapter interrogationAdapter = new InterrogationAdapter(this, playerModels, chatBox, conversation, this);
         playerInterrogation.setAdapter(interrogationAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         playerInterrogation.setLayoutManager(layoutManager);
@@ -80,6 +80,7 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(GameActivity.this, selectedPlayer.getName() + " is eliminated", Toast.LENGTH_SHORT).show();
                 playerModels.get(selectedIndex).setEliminated(true);
+                interrogationAdapter.notifyItemChanged(selectedIndex);
 
                 if(selectedPlayer.getRole().equals("killer"))
                 {
