@@ -39,7 +39,7 @@ public class LineupActivity extends AppCompatActivity {
         skipButton = findViewById(R.id.skipButton);
 
         addCharacter();
-        for (int i = 1; i <= 7; i++) {
+        for (int i = 1; i <= 8; i++) {
             int characterSelection = random.nextInt(character.size());
 
             playerModels.add(new PlayerModel(character.get(characterSelection).getName(), character.get(characterSelection).getGender(), null,
@@ -144,13 +144,31 @@ public class LineupActivity extends AppCompatActivity {
     }
 
     private void addCharacter() {
-        character.add(new Characters(R.drawable.james, "James", "male"));
-        character.add(new Characters(R.drawable.liam, "Liam", "male"));
-        character.add(new Characters(R.drawable.rachel, "Rachel", "female"));
-        character.add(new Characters(R.drawable.jason, "Jason", "male"));
-        character.add(new Characters(R.drawable.sarah, "Sarah", "female"));
+        character.add(new Characters(R.drawable.alice, "Alice", "female"));
+        character.add(new Characters(R.drawable.alisson, "Alisson", "female"));
+        character.add(new Characters(R.drawable.angel, "Angel", "female"));
         character.add(new Characters(R.drawable.bianca, "Bianca", "female"));
-        character.add(new Characters(R.drawable.haileey, "Haileey", "female"));
-//        character.add(new Characters(R.drawable.player, R.drawable.player, "John", "male"));
+        character.add(new Characters(R.drawable.bryan, "Bryan", "male"));
+        character.add(new Characters(R.drawable.cherry, "Cherry", "female"));
+        character.add(new Characters(R.drawable.fatima, "Fatima", "female"));
+        character.add(new Characters(R.drawable.francis, "Francis", "female"));
+        character.add(new Characters(R.drawable.fritz, "Fritz", "male"));
+        character.add(new Characters(R.drawable.jacob, "Jacob", "male"));
+        character.add(new Characters(R.drawable.james, "James", "male"));
+        character.add(new Characters(R.drawable.john, "John", "male"));
+        character.add(new Characters(R.drawable.juliet, "Juliet", "female"));
+        character.add(new Characters(R.drawable.kimberly, "Kimberly", "female"));
+        character.add(new Characters(R.drawable.kyle, "Kyle", "male"));
+        character.add(new Characters(R.drawable.lee, "Lee", "male"));
+        character.add(new Characters(R.drawable.liam, "Liam", "male"));
+        character.add(new Characters(R.drawable.louise, "Louise", "female"));
+        character.add(new Characters(R.drawable.merry, "Merry", "female"));
+        character.add(new Characters(R.drawable.nicolas, "Nicolas", "male"));
+        character.add(new Characters(R.drawable.rachel, "Rachel", "female"));
+        character.add(new Characters(R.drawable.sarah, "Sarah", "female"));
+        character.add(new Characters(R.drawable.sasa, "Sasa", "female"));
+        character.add(new Characters(R.drawable.steve, "Steve", "male"));
+        character.add(new Characters(R.drawable.venus, "Venus", "female"));
+        character.add(new Characters(R.drawable.vince, "Vince", "male"));
     }
 }
