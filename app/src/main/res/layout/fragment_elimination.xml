@@ -38,7 +38,7 @@
         <TextView
             android:id="@+id/resultPrompt"
             android:layout_marginTop="20sp"
-            android:layout_width="wrap_content"
+            android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:text="@string/result_prompt"
             android:textAlignment="center"

@@ -85,7 +85,7 @@ public class GameActivity extends AppCompatActivity {
                 interrogationAdapter.notifyItemChanged(selectedIndex);
 
                 updatePlayerCount(true);
-                if(survivorCount <= 2)
+                if(survivorCount <= 1)
                 {
                     //triggers lose fragment
                     Toast.makeText(GameActivity.this, "You Lose", Toast.LENGTH_SHORT).show();
