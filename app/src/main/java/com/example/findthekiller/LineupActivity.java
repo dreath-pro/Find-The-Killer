@@ -172,5 +172,33 @@ public class LineupActivity extends AppCompatActivity {
         character.add(new Characters(R.drawable.vince, "Vince", "Male"));
         character.add(new Characters(R.drawable.ryan, "Ryan", "Male"));
         character.add(new Characters(R.drawable.elize, "Elize", "Female"));
+        character.add(new Characters(R.drawable.marie, "Marie", "Female"));
+        character.add(new Characters(R.drawable.grace, "Grace", "Female"));
+        character.add(new Characters(R.drawable.adrian, "Adrian", "Male"));
+        character.add(new Characters(R.drawable.lloyd, "Lloyd", "Male"));
+        character.add(new Characters(R.drawable.austin, "Austin", "Male"));
+        character.add(new Characters(R.drawable.nicole, "Nicole", "Female"));
+        character.add(new Characters(R.drawable.olivia, "Olivia", "Female"));
+        character.add(new Characters(R.drawable.marco, "Marco", "Male"));
+        character.add(new Characters(R.drawable.kathy, "Kathy", "Female"));
+        character.add(new Characters(R.drawable.mitch, "Mitch", "Female"));
+        character.add(new Characters(R.drawable.angelo, "Angelo", "Male"));
+        character.add(new Characters(R.drawable.ian, "Ian", "Male"));
+        character.add(new Characters(R.drawable.katherine, "Katherine", "Female"));
+        character.add(new Characters(R.drawable.kenneth, "Kenneth", "Male"));
+        character.add(new Characters(R.drawable.hannah, "Hannah", "Female"));
+        character.add(new Characters(R.drawable.christine, "Christine", "Female"));
+        character.add(new Characters(R.drawable.aaron, "Aaron", "Male"));
+        character.add(new Characters(R.drawable.princess, "Princess", "Female"));
+        character.add(new Characters(R.drawable.clarence, "Clarence", "Male"));
+        character.add(new Characters(R.drawable.ivan, "Ivan", "Male"));
+        character.add(new Characters(R.drawable.gabrielle, "Gabrielle", "Female"));
+        character.add(new Characters(R.drawable.jerome, "Jerome", "Male"));
+        character.add(new Characters(R.drawable.mark, "Mark", "Male"));
+        character.add(new Characters(R.drawable.kate, "Kate", "Female"));
+        character.add(new Characters(R.drawable.tiffany, "Tiffany", "Female"));
+        character.add(new Characters(R.drawable.leo, "Leo", "Male"));
+        character.add(new Characters(R.drawable.clara, "Clara", "Female"));
+        character.add(new Characters(R.drawable.jovan, "Jovan", "Male"));
     }
 }
