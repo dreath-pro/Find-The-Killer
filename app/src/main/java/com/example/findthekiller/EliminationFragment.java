@@ -1,9 +1,14 @@
 package com.example.findthekiller;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +26,10 @@ public class EliminationFragment extends Fragment {
     Button backButton;
     PlayerModel selectedPlayer;
 
+    private Handler handler = new Handler();
+    int survivorColor, killerColor;
+    Context context;
+
     public EliminationFragment(PlayerModel selectedPlayer)
     {
         this.selectedPlayer = selectedPlayer;
@@ -33,6 +42,8 @@ public class EliminationFragment extends Fragment {
         initializeComponent(view);
         initializeData();
 
+        delayResult();
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -41,6 +52,46 @@ public class EliminationFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+
+        survivorColor = ContextCompat.getColor(context, R.color.survivorColor);
+        killerColor = ContextCompat.getColor(context, R.color.killerColor);
+    }
+
+    private void delayResult()
+    {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                String genderRefer;
+                if(selectedPlayer.getGender().equals("Male"))
+                {
+                    genderRefer = "he's";
+                }else
+                {
+                    genderRefer = "she's";
+                }
+
+                if(selectedPlayer.getRole().equals("Killer"))
+                {
+                    resultPrompt.setText(selectedPlayer.getName() + " is found guilty; " + genderRefer + " the culprit and the killer.");
+                    resultPrompt.setTextColor(killerColor);
+                }else
+                {
+                    resultPrompt.setText(selectedPlayer.getName() + " is innocent.");
+                    resultPrompt.setTextColor(survivorColor);
+                }
+
+                backButton.setVisibility(View.VISIBLE);
+                indicators.setVisibility(View.VISIBLE);
+                details.setVisibility(View.VISIBLE);
+            }
+        }, 900);
     }
 
     private void initializeComponent(View view)

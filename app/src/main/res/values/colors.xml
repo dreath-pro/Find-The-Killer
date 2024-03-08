@@ -5,4 +5,7 @@
 
     <color name="eliminatedColor">#8E95A1</color>
     <color name="defaultColor">#AEC3E8</color>
+
+    <color name="survivorColor">#2FC8CD</color>
+    <color name="killerColor">#CD2F66</color>
 </resources>

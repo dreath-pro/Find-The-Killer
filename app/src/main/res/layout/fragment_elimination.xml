@@ -41,9 +41,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/result_prompt"
+            android:textAlignment="center"
             android:textSize="30sp"
             android:layout_gravity="center"
-            android:textColor="#2FC8CD"/>
+            android:textColor="#A4C0C1"/>
 
         <LinearLayout
             android:id="@+id/playerDetails"
