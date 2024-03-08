@@ -28,6 +28,7 @@ public class EliminationFragment extends Fragment {
 
     private Handler handler = new Handler();
     int survivorColor, killerColor;
+    GameActivity gameActivity = new GameActivity();
     Context context;
 
     public EliminationFragment(PlayerModel selectedPlayer)
@@ -87,7 +88,7 @@ public class EliminationFragment extends Fragment {
                     resultPrompt.setTextColor(survivorColor);
                 }
 
-                backButton.setVisibility(View.VISIBLE);
+                backButton.setEnabled(true);
                 indicators.setVisibility(View.VISIBLE);
                 details.setVisibility(View.VISIBLE);
             }
@@ -114,7 +115,7 @@ public class EliminationFragment extends Fragment {
         playerGender.setText(selectedPlayer.getGender());
         playerRole.setText(selectedPlayer.getRole());
 
-        backButton.setVisibility(View.INVISIBLE);
+        backButton.setEnabled(false);
         indicators.setVisibility(View.INVISIBLE);
         details.setVisibility(View.INVISIBLE);
     }

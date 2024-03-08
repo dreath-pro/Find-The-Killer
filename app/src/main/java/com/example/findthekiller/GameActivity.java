@@ -28,7 +28,7 @@ public class GameActivity extends AppCompatActivity {
     TextView chatBox;
     TextView survivorNumber, killerNumber;
     Button inspectButton, suspectButton, askButton, quitButton;
-    private RecyclerView playerInterrogation;
+    RecyclerView playerInterrogation;
 
     private SpannableStringBuilder builder = new SpannableStringBuilder();
     private Random random = new Random();
@@ -88,13 +88,13 @@ public class GameActivity extends AppCompatActivity {
                 if(survivorCount <= 1)
                 {
                     //triggers lose fragment
-                    Toast.makeText(GameActivity.this, "You Lose", Toast.LENGTH_SHORT).show();
                     componentActivation(false);
+                    afterGame(false);
                 }else if(killerCount == 0)
                 {
                     //triggers win fragment
-                    Toast.makeText(GameActivity.this, "You Win", Toast.LENGTH_SHORT).show();
                     componentActivation(false);
+                    afterGame(true);
                 }else
                 {
                     showSuspectResult();
@@ -149,6 +149,24 @@ public class GameActivity extends AppCompatActivity {
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.gameLayout, eliminationFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    private void afterGame(boolean isWinning)
+    {
+        ArrayList<PlayerModel> killerLists = new ArrayList<>();
+        for(PlayerModel playerList : playerModels)
+        {
+            if(playerList.getRole().equals("Killer"))
+            {
+                killerLists.add(playerList);
+            }
+        }
+        Fragment aftergameFragment = new AftergameFragment(killerLists, isWinning);
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.gameLayout, aftergameFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
@@ -231,7 +249,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void initializeGreeting(int selectedPlayer) {
-        int selectGreeting = random.nextInt(6);
+        int selectGreeting = random.nextInt(12);
         switch (selectGreeting) {
             case 0:
                 conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Hi there, my name is " + playerModels.get(selectedPlayer).getName() + ". Feel free to ask me any questions!");
@@ -250,6 +268,24 @@ public class GameActivity extends AppCompatActivity {
                 break;
             case 5:
                 conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Yo, what's up? " + playerModels.get(selectedPlayer).getName() + " in the house, hit me up with your questions!");
+                break;
+            case 6:
+                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Howdy, it's " + playerModels.get(selectedPlayer).getName() + "! Ask away, and let's dive into some intriguing conversations!");
+                break;
+            case 7:
+                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Top of the day to ya! I'm " + playerModels.get(selectedPlayer).getName() + ", your friendly stranger question-answerer. Fire away!");
+                break;
+            case 8:
+                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Hey, hey! " + playerModels.get(selectedPlayer).getName() + " in the building, ready for the ultimate Q&A showdown. What's your move?");
+                break;
+            case 9:
+                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Greetings and salutations! It's " + playerModels.get(selectedPlayer).getName() + ", your go-to guy for all things questions. Lay 'em on me!");
+                break;
+            case 10:
+                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Yo, it's " + playerModels.get(selectedPlayer).getName() + "! Drop your questions like they're hot!");
+                break;
+            case 11:
+                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": What's kickin', amigo? I'm " + playerModels.get(selectedPlayer).getName() + ", throw your questions at me!");
                 break;
         }
         conversation.get(selectedPlayer).setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, builder.length(), 0);

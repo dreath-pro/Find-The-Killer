@@ -8,4 +8,8 @@
 
     <color name="survivorColor">#2FC8CD</color>
     <color name="killerColor">#CD2F66</color>
+
+    <color name="failPrompt">#F63434</color>
+    <color name="failText">#F4B2B2</color>
+    <color name="failBackground">#654141</color>
 </resources>

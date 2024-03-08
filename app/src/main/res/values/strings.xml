@@ -22,7 +22,7 @@
     <!--    main game player status-->
     <string name="number_of_players">0</string>
 
-<!--    fragment player details-->
+    <!--    fragment player details-->
     <string name="result_prompt">Player is Eliminated!</string>
 
     <string name="name_indicator">Name:</string>
@@ -33,4 +33,9 @@
 
     <string name="role_indicator">Role: </string>
     <string name="player_role">Family</string>
+
+<!--    game result texts-->
+    <string name="menu_button">Menu</string>
+    <string name="found_killers">You found nothing!</string>
+    <string name="killer_list">There is no killer.</string>
 </resources>

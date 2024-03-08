@@ -49,7 +49,7 @@ public class InterrogationAdapter extends RecyclerView.Adapter<InterrogationAdap
 
         if(playerModels.get(position).isEliminated()) {
             setDesaturatedColor(holder.image);
-            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.eliminatedColor));
+            holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.   color.eliminatedColor));
         } else {
             holder.image.setColorFilter(null);
             holder.cardView.setCardBackgroundColor(ContextCompat.getColor(context, R.color.defaultColor));
