@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AftergameFragment"
+    tools:context=".fragment.AftergameFragment"
     android:background="#414B65">
 
     <Button

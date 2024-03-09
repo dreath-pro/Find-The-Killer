@@ -1,7 +1,6 @@
-package com.example.findthekiller;
+package com.example.findthekiller.fragment;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,7 +15,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.findthekiller.model.PlayerModel;
+import com.example.findthekiller.R;
+import com.example.findthekiller.activity.GameActivity;
 
 public class EliminationFragment extends Fragment {
     LinearLayout indicators, details;

@@ -1,4 +1,4 @@
-package com.example.findthekiller;
+package com.example.findthekiller.fragment;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -16,6 +16,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.example.findthekiller.model.PlayerModel;
+import com.example.findthekiller.R;
+import com.example.findthekiller.adapter.KillerAdapter;
 
 import java.util.ArrayList;
 

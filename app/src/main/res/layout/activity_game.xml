@@ -50,7 +50,7 @@
             android:layout_height="35dp"
             android:layout_centerVertical="true"
             android:src="@drawable/survivor_icon"
-            android:tint="@color/white"/>
+            app:tint="@color/white"/>
 
         <TextView
             android:id="@+id/survivorNumber"

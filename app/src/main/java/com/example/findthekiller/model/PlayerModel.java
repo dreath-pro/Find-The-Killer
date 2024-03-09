@@ -1,20 +1,28 @@
-package com.example.findthekiller;
+package com.example.findthekiller.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import java.util.ArrayList;
 
 public class PlayerModel implements Parcelable{
     private String name, gender, role;
     private int image;
     private boolean isEliminated;
+    private int group;
 
     public PlayerModel(String name, String gender, String role, int image) {
         this.name = name;
         this.gender = gender;
         this.role = role;
         this.image = image;
-        this.isEliminated = false;
+        isEliminated = false;
+
+        /**
+         * 0 = undecided
+         * 1 = solo activity
+         * 2 = duo/private activity
+         * 3 or more = group activity
+         */
+        group = 0;
     }
 
     protected PlayerModel(Parcel in) {
@@ -23,6 +31,7 @@ public class PlayerModel implements Parcelable{
         role = in.readString();
         image = in.readInt();
         isEliminated = in.readByte() != 0;
+        group = in.readInt();
     }
 
     @Override
@@ -32,6 +41,7 @@ public class PlayerModel implements Parcelable{
         dest.writeString(role);
         dest.writeInt(image);
         dest.writeByte((byte) (isEliminated ? 1 : 0));
+        dest.writeInt(group);
     }
 
     @Override
@@ -91,5 +101,15 @@ public class PlayerModel implements Parcelable{
 
     public void setEliminated(boolean eliminated) {
         isEliminated = eliminated;
+    }
+
+    public int getGroup()
+    {
+        return group;
+    }
+
+    public void setGroup(int group)
+    {
+        this.group = group;
     }
 }

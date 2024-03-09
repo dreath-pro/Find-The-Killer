@@ -1,15 +1,15 @@
-package com.example.findthekiller;
+package com.example.findthekiller.model;
 
-public class Characters {
+public class CharacterModel {
     private int image;
     private String name, gender;
 
-    public Characters()
+    public CharacterModel()
     {
 
     }
 
-    public Characters(int image, String name, String gender) {
+    public CharacterModel(int image, String name, String gender) {
         this.image = image;
         this.name = name;
         this.gender = gender;

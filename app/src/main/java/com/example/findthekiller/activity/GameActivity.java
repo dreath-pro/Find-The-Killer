@@ -1,4 +1,4 @@
-package com.example.findthekiller;
+package com.example.findthekiller.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.text.style.AlignmentSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -20,6 +19,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.findthekiller.fragment.AftergameFragment;
+import com.example.findthekiller.fragment.EliminationFragment;
+import com.example.findthekiller.adapter.InterrogationAdapter;
+import com.example.findthekiller.model.PlayerModel;
+import com.example.findthekiller.R;
 
 import java.util.ArrayList;
 import java.util.Random;

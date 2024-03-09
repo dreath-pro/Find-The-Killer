@@ -1,7 +1,6 @@
-package com.example.findthekiller;
+package com.example.findthekiller.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.text.SpannableStringBuilder;
@@ -10,12 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.findthekiller.R;
+import com.example.findthekiller.activity.GameActivity;
+import com.example.findthekiller.model.PlayerModel;
 
 import java.util.ArrayList;
 

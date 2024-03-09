@@ -1,4 +1,4 @@
-package com.example.findthekiller;
+package com.example.findthekiller.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.findthekiller.model.PlayerModel;
+import com.example.findthekiller.R;
 
 import java.util.ArrayList;
 
