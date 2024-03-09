@@ -197,7 +197,7 @@ public class LineupActivity extends AppCompatActivity {
         character.add(new Characters(R.drawable.mark, "Mark", "Male"));
         character.add(new Characters(R.drawable.kate, "Kate", "Female"));
         character.add(new Characters(R.drawable.tiffany, "Tiffany", "Female"));
-        character.add(new Characters(R.drawable.leo, "Leo", "Male"));
+        character.add(new Characters(R.drawable.louie, "Louie", "Male"));
         character.add(new Characters(R.drawable.clara, "Clara", "Female"));
         character.add(new Characters(R.drawable.jovan, "Jovan", "Male"));
     }

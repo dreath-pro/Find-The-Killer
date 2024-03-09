@@ -34,8 +34,10 @@
     <string name="role_indicator">Role: </string>
     <string name="player_role">Family</string>
 
-<!--    game result texts-->
+    <!--    game result texts-->
     <string name="menu_button">Menu</string>
     <string name="found_killers">You found nothing!</string>
     <string name="killer_list">There is no killer.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
