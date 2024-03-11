@@ -11,7 +11,7 @@ public class Porch1 extends HouseModel {
 
     public Porch1()
     {
-        super("First Porch", false);
+        super("first porch", false);
         initializeActivity();
     }
 

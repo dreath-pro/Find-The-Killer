@@ -11,7 +11,7 @@ public class Entry extends HouseModel {
 
     public Entry()
     {
-        super("Entry", false);
+        super("entrance", false);
         initializeActivity();
     }
 

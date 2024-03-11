@@ -122,7 +122,7 @@ public class MessageModel {
         message.append(playerModel.getName()).append(": ");
 
         StringBuilder groupChat = new StringBuilder();
-        groupChat.append(" by myself ");
+        groupChat.append(" by myself.");
         for(int i = 1; i <= playerModel.getGroups().size(); i++)
         {
             if(i == 1)
@@ -150,40 +150,40 @@ public class MessageModel {
         int selectResponse = random.nextInt(12);
         switch (selectResponse) {
             case 0:
-                message.append("At the time of the incident, I was ").append(playerModel.getActivity()).append(groupChat);
+                message.append("At the time of the incident, I was ").append(playerModel.getActivity()).append(groupChat).append(" In the ").append(playerModel.getRoom()).append(".");
                 break;
             case 1:
-                message.append(playerModel.getActivity()).append(groupChat).append(" That's where I was when everything went down.");
+                message.append(playerModel.getActivity()).append(groupChat).append(" in the ").append(playerModel.getRoom()).append(", that's where I was when everything went down.");
                 break;
             case 2:
-                message.append("During the incident, my focus was ").append(playerModel.getActivity()).append(groupChat);
+                message.append("During the incident, my focus was ").append(playerModel.getActivity()).append(groupChat).append(" In the ").append(playerModel.getRoom()).append(".");
                 break;
             case 3:
-                message.append("I was right in the middle of ").append(playerModel.getActivity()).append(groupChat).append(" When the incident took place.");
+                message.append("I was right in the middle of ").append(playerModel.getActivity()).append(groupChat).append(" In the ").append(playerModel.getRoom()).append(" when the incident took place.");
                 break;
             case 4:
-                message.append(playerModel.getActivity()).append(groupChat).append(" That's how I spent the moments of the incident.");
+                message.append(playerModel.getActivity()).append(groupChat).append(" In the ").append(playerModel.getRoom()).append(", that's how I spent the moments of the incident.");
                 break;
             case 5:
-                message.append("At the time of the incident, I found myself ").append(playerModel.getActivity()).append(groupChat).append(" Creating a backdrop of laughter and camaraderie.");
+                message.append("At the time of the incident, I found myself ").append(playerModel.getActivity()).append(groupChat).append(" In the ").append(playerModel.getRoom()).append(" creating a backdrop of laughter and camaraderie.");
                 break;
             case 6:
-                message.append("As the incident transpired, I found myself ").append(playerModel.getActivity()).append(" Surrounded by the atmosphere").append(groupChat);
+                message.append("As the incident transpired, I found myself ").append(playerModel.getActivity()).append(" surrounded by the atmosphere").append(groupChat).append(" In the ").append(playerModel.getRoom()).append(".");
                 break;
             case 7:
-                message.append("In the moments of the incident, my focus was ").append(playerModel.getActivity()).append(groupChat).append(" Creating a vibrant atmosphere.");
+                message.append("In the moments of the incident, my focus was ").append(playerModel.getActivity()).append(groupChat).append(" In the ").append(playerModel.getRoom()).append(" creating a vibrant atmosphere.");
                 break;
             case 8:
-                message.append(playerModel.getActivity()).append(groupChat).append(" The incident became an unexpected twist in the activity, adding an unexpected layer to the evening.");
+                message.append(playerModel.getActivity()).append(groupChat).append(" In the ").append(playerModel.getRoom()).append(", the incident became an unexpected twist in the activity, adding an unexpected layer to the evening.");
                 break;
             case 9:
-                message.append("Amidst ").append(playerModel.getActivity()).append(groupChat).append(" The incident cast an unexpected shadow over the good moment.");
+                message.append("Amidst ").append(playerModel.getActivity()).append(groupChat).append(" In the ").append(playerModel.getRoom()).append(", the incident cast an unexpected shadow over the good moment.");
                 break;
             case 10:
-                message.append("In the midst of ").append(playerModel.getActivity()).append(groupChat).append(" The incident injected an unexpected twist into the night.");
+                message.append("In the midst of ").append(playerModel.getActivity()).append(groupChat).append(" In the ").append(playerModel.getRoom()).append(", the incident injected an unexpected twist into the night.");
                 break;
             case 11:
-                message.append(playerModel.getActivity()).append(groupChat).append(" Little did I know that the incident would become a pivotal point in the otherwise carefree evening.");
+                message.append(playerModel.getActivity()).append(groupChat).append(" In the ").append(playerModel.getRoom()).append(", little did I know that the incident would become a pivotal point in the otherwise carefree evening.");
                 break;
         }
 
