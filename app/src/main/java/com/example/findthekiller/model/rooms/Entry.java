@@ -8,7 +8,6 @@ import java.util.Random;
 
 public class Entry extends HouseModel {
     private ArrayList<String> roomActivities = new ArrayList<>();
-    private ArrayList<PlayerModel> roomOccupants = new ArrayList<>();
 
     public Entry()
     {
@@ -22,24 +21,6 @@ public class Entry extends HouseModel {
         Random random = new Random();
         int selectedActivity = random.nextInt(roomActivities.size());
         return roomActivities.get(selectedActivity);
-    }
-
-    private void addOccupant(PlayerModel occupant)
-    {
-        roomOccupants.add(occupant);
-    }
-
-    private void removeOccupant(PlayerModel occupant)
-    {
-        ArrayList<String> occupantNames = new ArrayList<>();
-
-        for(PlayerModel roomOccupant : roomOccupants)
-        {
-            occupantNames.add(roomOccupant.getName());
-        }
-        int occupantIndex = occupantNames.indexOf(occupant.getName());
-
-        roomOccupants.remove(occupantIndex);
     }
 
     private void initializeActivity()

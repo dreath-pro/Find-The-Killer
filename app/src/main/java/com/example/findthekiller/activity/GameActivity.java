@@ -8,6 +8,7 @@ import android.text.style.AlignmentSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
@@ -23,8 +24,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.findthekiller.fragment.AftergameFragment;
 import com.example.findthekiller.fragment.EliminationFragment;
 import com.example.findthekiller.adapter.InterrogationAdapter;
+import com.example.findthekiller.model.HouseModel;
+import com.example.findthekiller.model.MessageModel;
 import com.example.findthekiller.model.PlayerModel;
 import com.example.findthekiller.R;
+import com.example.findthekiller.model.rooms.Entry;
+import com.example.findthekiller.model.rooms.Porch1;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -38,8 +43,11 @@ public class GameActivity extends AppCompatActivity {
     private SpannableStringBuilder builder = new SpannableStringBuilder();
     private Random random = new Random();
 
+    InterrogationAdapter interrogationAdapter;
+
     private ArrayList<SpannableStringBuilder> conversation = new ArrayList<>();
     private ArrayList<PlayerModel> playerModels = new ArrayList<>();
+    private ArrayList<HouseModel> rooms = new ArrayList<>();
     private static PlayerModel selectedPlayer;
     private static int selectedIndex;
     private int survivorCount, killerCount;
@@ -61,7 +69,7 @@ public class GameActivity extends AppCompatActivity {
 
         playerModels = getIntent().getParcelableArrayListExtra("playerModels");
 
-        InterrogationAdapter interrogationAdapter = new InterrogationAdapter(this, playerModels, chatBox, conversation, this);
+        interrogationAdapter = new InterrogationAdapter(this, playerModels, chatBox, conversation, this);
         playerInterrogation.setAdapter(interrogationAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         playerInterrogation.setLayoutManager(layoutManager);
@@ -71,10 +79,15 @@ public class GameActivity extends AppCompatActivity {
 
         for (int i = 0; i <= playerModels.size() - 1; i++) {
             conversation.add(new SpannableStringBuilder());
-            initializeGreeting(i);
+            conversation.get(i).append(new MessageModel(playerModels.get(i)).selectGreeting());
         }
         chatBox.setText(conversation.get(0));
         updatePlayerCount(false);
+        initializeRoom();
+
+        componentActivation(false);
+        killerMove();
+        componentActivation(true);
 
         inspectButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,14 +116,11 @@ public class GameActivity extends AppCompatActivity {
                 }else
                 {
                     showSuspectResult();
+                    changeFocusChat();
 
-                    indexValidation();
-                    while(playerModels.get(selectedIndex).isEliminated())
-                    {
-                        indexValidation();
-                    }
-                    selectedPlayer = playerModels.get(selectedIndex);
-                    chatBox.setText(conversation.get(selectedIndex));
+                    componentActivation(false);
+                    killerMove();
+                    componentActivation(true);
                 }
             }
         });
@@ -118,7 +128,8 @@ public class GameActivity extends AppCompatActivity {
         askButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addQuestion(selectedIndex);
+                conversation.get(selectedIndex).append(new MessageModel(playerModels.get(selectedIndex)).askQuestion());
+                chatBox.setText(conversation.get(selectedIndex));
             }
         });
 
@@ -136,6 +147,17 @@ public class GameActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    private void changeFocusChat()
+    {
+        indexValidation();
+        while(playerModels.get(selectedIndex).isEliminated())
+        {
+            indexValidation();
+        }
+        selectedPlayer = playerModels.get(selectedIndex);
+        chatBox.setText(conversation.get(selectedIndex));
     }
 
     @Override
@@ -244,56 +266,103 @@ public class GameActivity extends AppCompatActivity {
         GameActivity.selectedIndex = selectedIndex;
     }
 
-    private void addQuestion(int selectedPlayer) {
-        conversation.get(selectedPlayer).append("You: Hey haha you are cute muah! wanna play some other time " + playerModels.get(selectedPlayer).getName() + "?");
-        conversation.get(selectedPlayer).setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, builder.length(), 0);
+    private void survivorMove()
+    {
+        int roomSelected = random.nextInt(rooms.size());
 
-        conversation.get(selectedPlayer).append("\n\n");
+        int selectedPerson = random.nextInt(playerModels.size());
+        int numberOfPerson = 0;
+        int socialize = 1;
 
-        chatBox.setText(conversation.get(selectedIndex));
+        /**
+         * socialize
+         * 1 = alone
+         * 2 = duo/partner
+         * 3 = 3 or more people
+         */
+
+        for(int i = 0; i <= playerModels.size() - 1; i++)
+        {
+            playerModels.get(i).clearGroup();
+            playerModels.get(i).setRoom(null);
+            playerModels.get(i).setActivity(null);
+
+            if(!playerModels.get(i).isEliminated() && !playerModels.get(i).getRole().equals("Killer") && playerModels.get(i).getGroups().isEmpty())
+            {
+                socialize = random.nextInt(3) + 1;
+                switch (socialize)
+                {
+                    case 1:
+                        numberOfPerson = 1;
+                        break;
+                    case 2:
+                        numberOfPerson = 2;
+                        break;
+                    case 3:
+                        numberOfPerson = random.nextInt(playerModels.size()) + 3;
+                        break;
+                }
+
+                roomSelected = random.nextInt(rooms.size());
+
+                for(int j = 1; j <= numberOfPerson; j++)
+                {
+                    if(numberOfPerson > 1)
+                    {
+                        selectedPerson = random.nextInt(playerModels.size());
+                        while(playerModels.get(i).getName().equals(playerModels.get(selectedPerson).getName()) && !playerModels.get(selectedPerson).getRole().equals("Killer"))
+                        {
+                            selectedPerson = random.nextInt(playerModels.size());
+                        }
+
+                        playerModels.get(i).addGroup(playerModels.get(selectedPerson));
+
+                        playerModels.get(selectedPerson).addGroup(playerModels.get(i));
+                        playerModels.get(selectedPerson).setRoom(rooms.get(roomSelected).getRoomName());
+                        playerModels.get(selectedPerson).setActivity(rooms.get(roomSelected).getActivity());
+                    }
+
+                    playerModels.get(i).setRoom(rooms.get(roomSelected).getRoomName());
+                    playerModels.get(i).setActivity(rooms.get(roomSelected).getActivity());
+                }
+            }
+        }
     }
 
-    private void initializeGreeting(int selectedPlayer) {
-        int selectGreeting = random.nextInt(12);
-        switch (selectGreeting) {
-            case 0:
-                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Hi there, my name is " + playerModels.get(selectedPlayer).getName() + ". Feel free to ask me any questions!");
-                break;
-            case 1:
-                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Hey! I'm " + playerModels.get(selectedPlayer).getName() + ", here to answer any questions you might have.");
-                break;
-            case 2:
-                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Hello, there! " + playerModels.get(selectedPlayer).getName() + " here, ready for your curious inquiries.");
-                break;
-            case 3:
-                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Greetings! It's " + playerModels.get(selectedPlayer).getName() + ", feel free to shoot me any questions your heart desires.");
-                break;
-            case 4:
-                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Hi there, " + playerModels.get(selectedPlayer).getName() + " at your service! Ask away, and let's have a chat.");
-                break;
-            case 5:
-                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Yo, what's up? " + playerModels.get(selectedPlayer).getName() + " in the house, hit me up with your questions!");
-                break;
-            case 6:
-                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Howdy, it's " + playerModels.get(selectedPlayer).getName() + "! Ask away, and let's dive into some intriguing conversations!");
-                break;
-            case 7:
-                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Top of the day to ya! I'm " + playerModels.get(selectedPlayer).getName() + ", your friendly stranger question-answerer. Fire away!");
-                break;
-            case 8:
-                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Hey, hey! " + playerModels.get(selectedPlayer).getName() + " in the building, ready for the ultimate Q&A showdown. What's your move?");
-                break;
-            case 9:
-                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Greetings and salutations! It's " + playerModels.get(selectedPlayer).getName() + ", your go-to guy for all things questions. Lay 'em on me!");
-                break;
-            case 10:
-                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": Yo, it's " + playerModels.get(selectedPlayer).getName() + "! Drop your questions like they're hot!");
-                break;
-            case 11:
-                conversation.get(selectedPlayer).append(playerModels.get(selectedPlayer).getName() + ": What's kickin', amigo? I'm " + playerModels.get(selectedPlayer).getName() + ", throw your questions at me!");
-                break;
+    private void killerMove()
+    {
+        boolean isReported = false;
+
+        while(!isReported)
+        {
+            survivorMove();
+            for(int i = 0; i <= playerModels.size() - 1; i++)
+            {
+                if(!playerModels.get(i).getRole().equals("Killer") && playerModels.get(i).getGroups().isEmpty() && !playerModels.get(i).isEliminated())
+                {
+                    if(survivorCount <= 1)
+                    {
+                        afterGame(false);
+                    }else
+                    {
+                        playerModels.get(i).setEliminated(true);
+                        interrogationAdapter.notifyItemChanged(selectedIndex);
+
+                        updatePlayerCount(true);
+                        changeFocusChat();
+                        isReported = true;
+
+                        Toast.makeText(this, playerModels.get(i).getName() + "'s corpse been found!", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
+                }
+            }
         }
-        conversation.get(selectedPlayer).setSpan(new AlignmentSpan.Standard(Layout.Alignment.ALIGN_NORMAL), 0, builder.length(), 0);
-        conversation.get(selectedPlayer).append("\n\n");
+    }
+
+    private void initializeRoom()
+    {
+        rooms.add(new Entry());
+        rooms.add(new Porch1());
     }
 }

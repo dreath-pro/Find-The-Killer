@@ -3,26 +3,26 @@ package com.example.findthekiller.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 public class PlayerModel implements Parcelable{
     private String name, gender, role;
     private int image;
     private boolean isEliminated;
-    private int group;
+    private ArrayList<PlayerModel> groups = new ArrayList<>();
+    private String room;
+    private String activity;
 
     public PlayerModel(String name, String gender, String role, int image) {
         this.name = name;
         this.gender = gender;
         this.role = role;
         this.image = image;
-        isEliminated = false;
 
-        /**
-         * 0 = undecided
-         * 1 = solo activity
-         * 2 = duo/private activity
-         * 3 or more = group activity
-         */
-        group = 0;
+        isEliminated = false;
+        groups = null;
+        room = null;
+        activity = null;
     }
 
     protected PlayerModel(Parcel in) {
@@ -31,7 +31,6 @@ public class PlayerModel implements Parcelable{
         role = in.readString();
         image = in.readInt();
         isEliminated = in.readByte() != 0;
-        group = in.readInt();
     }
 
     @Override
@@ -41,7 +40,6 @@ public class PlayerModel implements Parcelable{
         dest.writeString(role);
         dest.writeInt(image);
         dest.writeByte((byte) (isEliminated ? 1 : 0));
-        dest.writeInt(group);
     }
 
     @Override
@@ -103,13 +101,33 @@ public class PlayerModel implements Parcelable{
         isEliminated = eliminated;
     }
 
-    public int getGroup()
+    public void addGroup(PlayerModel player)
     {
-        return group;
+        groups.add(player);
     }
 
-    public void setGroup(int group)
+    public void clearGroup()
     {
-        this.group = group;
+        groups.clear();
+    }
+
+    public ArrayList<PlayerModel> getGroups() {
+        return groups;
+    }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
+
+    public String getActivity() {
+        return activity;
+    }
+
+    public void setActivity(String activity) {
+        this.activity = activity;
     }
 }
