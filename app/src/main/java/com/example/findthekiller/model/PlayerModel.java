@@ -21,8 +21,8 @@ public class PlayerModel implements Parcelable{
 
         isEliminated = false;
         groups = null;
-        room = null;
-        activity = null;
+        room = "";
+        activity = "";
     }
 
     protected PlayerModel(Parcel in) {

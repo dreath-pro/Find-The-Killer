@@ -32,6 +32,7 @@ import com.example.findthekiller.model.rooms.Entry;
 import com.example.findthekiller.model.rooms.Porch1;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity {
@@ -248,6 +249,10 @@ public class GameActivity extends AppCompatActivity {
         int numberOfPerson = 0;
         int socialize = 1;
 
+        String room, activity;
+        boolean firstNonGroup = false;
+        double reducedSurvivorCount = survivorCount * .30;
+
         chatBox.setText(conversation.get(selectedIndex));
         /**
          * socialize
@@ -259,46 +264,84 @@ public class GameActivity extends AppCompatActivity {
         for(int i = 0; i <= playerModels.size() - 1; i++)
         {
             playerModels.get(i).clearGroup();
-            playerModels.get(i).setRoom(null);
-            playerModels.get(i).setActivity(null);
+            playerModels.get(i).setRoom("");
+            playerModels.get(i).setActivity("");
         }
 
         for (int i = 0; i <= playerModels.size() - 1; i++) {
+            if(!firstNonGroup)
+            {
+                if(!playerModels.get(i).getRole().equals("Killer"))
+                {
+                    firstNonGroup = true;
+                }
+            }
+
             if (!playerModels.get(i).isEliminated()) {
                 if(playerModels.get(i).getGroups().isEmpty())
                 {
                     socialize = random.nextInt(3) + 1;
                     switch (socialize) {
                         case 1:
-                            numberOfPerson = 1;
+                            numberOfPerson = 0;
                             break;
                         case 2:
-                            numberOfPerson = 2;
+                            numberOfPerson = 1;
                             break;
                         case 3:
-                            numberOfPerson = random.nextInt(playerModels.size()) + 3;
+                            numberOfPerson = random.nextInt((int)reducedSurvivorCount) + 2;
                             break;
                     }
 
                     roomSelected = random.nextInt(rooms.size());
+                    room = rooms.get(roomSelected).getRoomName();
+                    activity = rooms.get(roomSelected).getActivity();
 
                     for (int j = 1; j <= numberOfPerson; j++) {
-                        if (numberOfPerson > 1) {
-                            selectedPerson = random.nextInt(playerModels.size());
-                            while (playerModels.get(i).getName().equals(playerModels.get(selectedPerson).getName()) && !playerModels.get(selectedPerson).getRole().equals("Killer")) {
+                        selectedPerson = random.nextInt(playerModels.size());
+
+                        if(firstNonGroup)
+                        {
+                            while (playerModels.get(i).getName().equals(playerModels.get(selectedPerson).getName())
+                                    || playerModels.get(selectedPerson).getRole().equals("Killer")
+                                    || playerModels.get(selectedPerson).isEliminated())
+                            {
                                 selectedPerson = random.nextInt(playerModels.size());
                             }
-
-                            playerModels.get(i).addGroup(playerModels.get(selectedPerson));
-
-                            playerModels.get(selectedPerson).addGroup(playerModels.get(i));
-                            playerModels.get(selectedPerson).setRoom(rooms.get(roomSelected).getRoomName());
-                            playerModels.get(selectedPerson).setActivity(rooms.get(roomSelected).getActivity());
+                        }else
+                        {
+                            while (playerModels.get(i).getName().equals(playerModels.get(selectedPerson).getName())
+                                    || playerModels.get(selectedPerson).getRole().equals("Killer")
+                                    || playerModels.get(selectedPerson).isEliminated()
+                                    || !playerModels.get(selectedPerson).getRoom().isEmpty()
+                                    || !playerModels.get(selectedPerson).getActivity().isEmpty())
+                            {
+                                selectedPerson = random.nextInt(playerModels.size());
+                            }
                         }
 
-                        playerModels.get(i).setRoom(rooms.get(roomSelected).getRoomName());
-                        playerModels.get(i).setActivity(rooms.get(roomSelected).getActivity());
+                        playerModels.get(i).addGroup(playerModels.get(selectedPerson));
+
+                        if(!playerModels.get(i).getRole().equals("Killer"))
+                        {
+                            if(!playerModels.get(i).getGroups().isEmpty())
+                            {
+                                for(int groupIdx = 0; groupIdx <= playerModels.get(i).getGroups().size() - 1; groupIdx++)
+                                {
+                                    if(!Objects.equals(playerModels.get(selectedPerson).getName(), playerModels.get(i).getGroups().get(groupIdx).getName()))
+                                    {
+                                        playerModels.get(selectedPerson).addGroup(playerModels.get(i).getGroups().get(groupIdx));
+                                    }
+                                }
+                            }
+                            playerModels.get(selectedPerson).addGroup(playerModels.get(i));
+                            playerModels.get(selectedPerson).setRoom(room);
+                            playerModels.get(selectedPerson).setActivity(activity);
+                        }
                     }
+
+                    playerModels.get(i).setRoom(room);
+                    playerModels.get(i).setActivity(activity);
                 }
             }
         }
