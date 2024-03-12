@@ -129,7 +129,7 @@ public class GameActivity extends AppCompatActivity {
                 conversation.get(selectedIndex).append(new MessageModel(playerModels.get(selectedIndex)).askQuestion());
                 chatBox.setText(conversation.get(selectedIndex));
 
-//                survivorMove();
+//                assignSurvivors();
             }
         });
 
@@ -243,130 +243,134 @@ public class GameActivity extends AppCompatActivity {
         GameActivity.selectedIndex = selectedIndex;
     }
 
-    private void survivorMove() {
-        int roomSelected = random.nextInt(rooms.size());
-        int selectedPerson = random.nextInt(playerModels.size());
-        int numberOfPerson = 0;
+    private void assignSurvivors() {
         int socialize = 1;
+        int numberOfPerson = 0, selectedPerson = 0;
+        String selectedRoom = "", selectedActivity = "";
+        double reducedSurvivorCount = survivorCount * .20;
 
-        String room, activity;
-        boolean firstNonGroup = false;
-        double reducedSurvivorCount = survivorCount * .30;
-
-        chatBox.setText(conversation.get(selectedIndex));
-        /**
-         * socialize
-         * 1 = alone
-         * 2 = duo/partner
-         * 3 = 3 or more people
-         */
-
-        for(int i = 0; i <= playerModels.size() - 1; i++)
-        {
+        for (int i = 0; i <= playerModels.size() - 1; i++) {
             playerModels.get(i).clearGroup();
             playerModels.get(i).setRoom("");
             playerModels.get(i).setActivity("");
         }
 
+        ArrayList<PlayerModel> validPlayers = new ArrayList<>();
         for (int i = 0; i <= playerModels.size() - 1; i++) {
-            if(!firstNonGroup)
-            {
-                if(!playerModels.get(i).getRole().equals("Killer"))
-                {
-                    firstNonGroup = true;
-                }
+            boolean isValid = true;
+
+            if (playerModels.get(i).getRole().equals("Killer")) {
+                isValid = false;
+            }
+            if (playerModels.get(i).isEliminated()) {
+                isValid = false;
+            }
+            if (!playerModels.get(i).getRoom().isEmpty()) {
+                isValid = false;
+            }
+            if (!playerModels.get(i).getActivity().isEmpty()) {
+                isValid = false;
             }
 
-            if (!playerModels.get(i).isEliminated()) {
-                if(playerModels.get(i).getGroups().isEmpty())
-                {
-                    socialize = random.nextInt(3) + 1;
-                    switch (socialize) {
-                        case 1:
-                            numberOfPerson = 0;
-                            break;
-                        case 2:
-                            numberOfPerson = 1;
-                            break;
-                        case 3:
-                            numberOfPerson = random.nextInt((int)reducedSurvivorCount) + 2;
-                            break;
+            if (isValid) {
+                validPlayers.add(playerModels.get(i));
+            }
+        }
+
+        // for assigning group
+        for (PlayerModel validPlayer : validPlayers) {
+            if (validPlayer.getGroups().isEmpty()) {
+                socialize = random.nextInt(3) + 1;
+                switch (socialize) {
+                    case 1:
+                        numberOfPerson = 0;
+                        break;
+                    case 2:
+                        numberOfPerson = 1;
+                        break;
+                    case 3:
+                        numberOfPerson = random.nextInt((int) reducedSurvivorCount) + 2;
+                        break;
+                }
+
+                for (int i = 1; i <= numberOfPerson; i++) {
+                    selectedPerson = random.nextInt(validPlayers.size());
+                    while (validPlayer.getName().equals(validPlayers.get(selectedPerson).getName())) {
+                        selectedPerson = random.nextInt(validPlayers.size());
                     }
 
-                    roomSelected = random.nextInt(rooms.size());
-                    room = rooms.get(roomSelected).getRoomName();
-                    activity = rooms.get(roomSelected).getActivity();
+                    if(!validPlayers.get(selectedPerson).getGroups().isEmpty())
+                    {
+                        validPlayer.addGroup(validPlayers.get(selectedPerson));
+                        validPlayers.get(selectedPerson).addGroup(validPlayer);
 
-                    for (int j = 1; j <= numberOfPerson; j++) {
-                        selectedPerson = random.nextInt(playerModels.size());
-
-                        if(firstNonGroup)
+                        for(int groudIdx = 0; groudIdx <= validPlayers.get(selectedPerson).getGroups().size() - 1; groudIdx++)
                         {
-                            while (playerModels.get(i).getName().equals(playerModels.get(selectedPerson).getName())
-                                    || playerModels.get(selectedPerson).getRole().equals("Killer")
-                                    || playerModels.get(selectedPerson).isEliminated())
-                            {
-                                selectedPerson = random.nextInt(playerModels.size());
-                            }
-                        }else
-                        {
-                            while (playerModels.get(i).getName().equals(playerModels.get(selectedPerson).getName())
-                                    || playerModels.get(selectedPerson).getRole().equals("Killer")
-                                    || playerModels.get(selectedPerson).isEliminated()
-                                    || !playerModels.get(selectedPerson).getRoom().isEmpty()
-                                    || !playerModels.get(selectedPerson).getActivity().isEmpty())
-                            {
-                                selectedPerson = random.nextInt(playerModels.size());
-                            }
+                            validPlayers.get(selectedPerson).getGroups().get(groudIdx).addGroup(validPlayer);
                         }
+                    }else
+                    {
+                        validPlayer.addGroup(validPlayers.get(selectedPerson));
+                        validPlayers.get(selectedPerson).addGroup(validPlayer);
 
-                        playerModels.get(i).addGroup(playerModels.get(selectedPerson));
-
-                        if(!playerModels.get(i).getRole().equals("Killer"))
-                        {
-                            if(!playerModels.get(i).getGroups().isEmpty())
-                            {
-                                for(int groupIdx = 0; groupIdx <= playerModels.get(i).getGroups().size() - 1; groupIdx++)
-                                {
-                                    if(!Objects.equals(playerModels.get(selectedPerson).getName(), playerModels.get(i).getGroups().get(groupIdx).getName()))
-                                    {
-                                        playerModels.get(selectedPerson).addGroup(playerModels.get(i).getGroups().get(groupIdx));
-                                    }
-                                }
+                        for (int groupIdx = 0; groupIdx <= validPlayer.getGroups().size() - 1; groupIdx++) {
+                            if (!validPlayers.get(selectedPerson).getName().equals(validPlayer.getGroups().get(groupIdx).getName())) {
+                                validPlayers.get(selectedPerson).addGroup(validPlayer.getGroups().get(groupIdx));
                             }
-                            playerModels.get(selectedPerson).addGroup(playerModels.get(i));
-                            playerModels.get(selectedPerson).setRoom(room);
-                            playerModels.get(selectedPerson).setActivity(activity);
                         }
                     }
+                }
+            }
+        }
 
-                    playerModels.get(i).setRoom(room);
-                    playerModels.get(i).setActivity(activity);
+        // for assigning room and activity
+        for (PlayerModel validPlayer : validPlayers) {
+            int roomSelection = random.nextInt(rooms.size());
+            selectedRoom = rooms.get(roomSelection).getRoomName();
+
+            switch (validPlayer.getGroups().size()) {
+                case 0:
+                    selectedActivity = rooms.get(roomSelection).getActivity(0);
+                    break;
+                case 1:
+                    if (!validPlayer.getGender().equals(validPlayers.get(selectedPerson).getGender())) {
+                        int toPartner = random.nextInt(2);
+                        if (toPartner == 0) {
+                            selectedActivity = rooms.get(roomSelection).getActivity(1);
+                        } else {
+                            selectedActivity = rooms.get(roomSelection).getActivity(2);
+                        }
+                    } else {
+                        selectedActivity = rooms.get(roomSelection).getActivity(1);
+                    }
+                    break;
+                default:
+                    selectedActivity = rooms.get(roomSelection).getActivity(3);
+                    break;
+            }
+        }
+
+        for (PlayerModel playerModel : playerModels) {
+            for (PlayerModel validPlayer : validPlayers) {
+                if (playerModel.getName().equals(validPlayer.getName())) {
+                    playerModel = validPlayer;
                 }
             }
         }
     }
 
-    private void killerMove()
-    {
+    private void killerMove() {
         boolean isReported = false;
 
-        while(!isReported)
-        {
-            survivorMove();
-            for(int i = 0; i <= playerModels.size() - 1; i++)
-            {
-                if(!playerModels.get(i).getRole().equals("Killer"))
-                {
-                    if(playerModels.get(i).getGroups().isEmpty())
-                    {
-                        if(!playerModels.get(i).isEliminated())
-                        {
-                            if(survivorCount <= 1)
-                            {
+        while (!isReported) {
+            assignSurvivors();
+            for (int i = 0; i <= playerModels.size() - 1; i++) {
+                if (!playerModels.get(i).getRole().equals("Killer")) {
+                    if (playerModels.get(i).getGroups().isEmpty()) {
+                        if (!playerModels.get(i).isEliminated()) {
+                            if (survivorCount <= 1) {
                                 afterGame(false);
-                            }else
-                            {
+                            } else {
                                 playerModels.get(i).setEliminated(true);
                                 interrogationAdapter.notifyItemChanged(selectedIndex);
 

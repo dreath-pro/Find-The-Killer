@@ -11,7 +11,7 @@ public abstract class HouseModel {
         this.isLock = isLock;
     }
 
-    public abstract String getActivity();
+    public abstract String getActivity(int groupType);
 
     public String getRoomName() {
         return roomName;
