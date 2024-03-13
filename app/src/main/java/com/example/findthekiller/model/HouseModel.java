@@ -31,7 +31,6 @@ public abstract class HouseModel {
 
     //    private void initializeRooms()
 //    {
-//        rooms.add("Porch 2");
 //        rooms.add("First Car Garage");
 //        rooms.add("Second Car Garage");
 //        rooms.add("Util");

@@ -12,6 +12,7 @@ public class PlayerModel implements Parcelable{
     private ArrayList<PlayerModel> groups = new ArrayList<>();
     private String room;
     private String activity;
+    private boolean isValid;
 
     public PlayerModel(String name, String gender, String role, int image) {
         this.name = name;
@@ -23,6 +24,7 @@ public class PlayerModel implements Parcelable{
         groups = null;
         room = "";
         activity = "";
+        isValid = true;
     }
 
     protected PlayerModel(Parcel in) {
@@ -129,5 +131,15 @@ public class PlayerModel implements Parcelable{
 
     public void setActivity(String activity) {
         this.activity = activity;
+    }
+
+    public boolean isValid()
+    {
+        return isValid;
+    }
+
+    public void setValid(boolean isValid)
+    {
+        this.isValid = isValid;
     }
 }
