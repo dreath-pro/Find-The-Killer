@@ -29,6 +29,8 @@ import com.example.findthekiller.model.MessageModel;
 import com.example.findthekiller.model.PlayerModel;
 import com.example.findthekiller.R;
 import com.example.findthekiller.model.rooms.Entry;
+import com.example.findthekiller.model.rooms.Garage1;
+import com.example.findthekiller.model.rooms.Garage2;
 import com.example.findthekiller.model.rooms.Porch1;
 
 import java.lang.reflect.Array;
@@ -295,6 +297,11 @@ public class GameActivity extends AppCompatActivity {
             playerModels.get(i).setRoom("");
             playerModels.get(i).setActivity("");
             playerModels.get(i).setValid(true);
+
+            for(HouseModel room : rooms)
+            {
+                room.setLock(false);
+            }
         }
 
         isPlayerValid();
@@ -342,6 +349,10 @@ public class GameActivity extends AppCompatActivity {
                         if (!playerModels.get(i).getGender().equals(playerModels.get(selectedPerson).getGender())) {
                             int toPartner = random.nextInt(2);
                             if (toPartner == 0) {
+                                if(isLockable(rooms.get(roomSelection).getRoomName()))
+                                {
+                                    rooms.get(roomSelection).setLock(true);
+                                }
                                 selectedActivity = rooms.get(roomSelection).getActivity(2);
                             } else {
                                 selectedActivity = rooms.get(roomSelection).getActivity(1);
@@ -419,5 +430,19 @@ public class GameActivity extends AppCompatActivity {
     private void initializeRoom() {
         rooms.add(new Entry());
         rooms.add(new Porch1());
+        rooms.add(new Garage1());
+        rooms.add(new Garage2());
+    }
+
+    private boolean isLockable(String room)
+    {
+        boolean isLockable = false;
+
+        if(room.equals("first garage") || room.equals("second garage"))
+        {
+            isLockable = true;
+        }
+
+        return isLockable;
     }
 }
