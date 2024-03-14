@@ -31,12 +31,6 @@ public abstract class HouseModel {
 
     //    private void initializeRooms()
 //    {
-//        rooms.add("Second Bedroom");
-//        rooms.add("Second Bedroom Wardrobe");
-//        rooms.add("Second Bath");
-//        rooms.add("Third Bedroom");
-//        rooms.add("Third Bedroom Wardrobe");
-//        rooms.add("Third Bath");
 //        rooms.add("Outdoor Kitchen");
 //        rooms.add("Morning Bar");
 //        rooms.add("Great Room");

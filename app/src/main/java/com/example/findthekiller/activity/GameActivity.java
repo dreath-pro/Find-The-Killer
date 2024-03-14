@@ -31,8 +31,14 @@ import com.example.findthekiller.R;
 import com.example.findthekiller.model.rooms.BathWardrobe1;
 import com.example.findthekiller.model.rooms.BathWardrobe2;
 import com.example.findthekiller.model.rooms.Bedroom1;
+import com.example.findthekiller.model.rooms.Bedroom2;
+import com.example.findthekiller.model.rooms.Bedroom3;
 import com.example.findthekiller.model.rooms.BedroomBath1;
+import com.example.findthekiller.model.rooms.BedroomBath2;
+import com.example.findthekiller.model.rooms.BedroomBath3;
 import com.example.findthekiller.model.rooms.BedroomWardrobe1;
+import com.example.findthekiller.model.rooms.BedroomWardrobe2;
+import com.example.findthekiller.model.rooms.BedroomWardrobe3;
 import com.example.findthekiller.model.rooms.Dining;
 import com.example.findthekiller.model.rooms.Entry;
 import com.example.findthekiller.model.rooms.Foyer;
@@ -456,6 +462,12 @@ public class GameActivity extends AppCompatActivity {
         rooms.add(new Bedroom1());
         rooms.add(new BedroomWardrobe1());
         rooms.add(new BedroomBath1());
+        rooms.add(new Bedroom2());
+        rooms.add(new BedroomWardrobe2());
+        rooms.add(new BedroomBath2());
+        rooms.add(new Bedroom3());
+        rooms.add(new BedroomWardrobe3());
+        rooms.add(new BedroomBath3());
     }
 
     private boolean isLockable(String room)
@@ -482,15 +494,15 @@ public class GameActivity extends AppCompatActivity {
         {
             isLockable = true;
         }
-        if(room.equals("first bedroom"))
+        if(room.equals("first bedroom") || room.equals("second bedroom") || room.equals("third bedroom"))
         {
             isLockable = true;
         }
-        if(room.equals("first bedroom wardrobe"))
+        if(room.equals("first bedroom wardrobe") || room.equals("second bedroom wardrobe") || room.equals("third bedroom wardrobe"))
         {
             isLockable = true;
         }
-        if(room.equals("first bedroom bath"))
+        if(room.equals("first bedroom bath") || room.equals("second bedroom bath") || room.equals("third bedroom bath"))
         {
             isLockable = true;
         }
