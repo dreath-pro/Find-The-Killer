@@ -46,6 +46,7 @@ import com.example.findthekiller.model.rooms.Garage1;
 import com.example.findthekiller.model.rooms.Garage2;
 import com.example.findthekiller.model.rooms.MasterBath;
 import com.example.findthekiller.model.rooms.Mud;
+import com.example.findthekiller.model.rooms.OutdoorKitchen;
 import com.example.findthekiller.model.rooms.Porch1;
 import com.example.findthekiller.model.rooms.Porch2;
 import com.example.findthekiller.model.rooms.Study;
@@ -468,6 +469,7 @@ public class GameActivity extends AppCompatActivity {
         rooms.add(new Bedroom3());
         rooms.add(new BedroomWardrobe3());
         rooms.add(new BedroomBath3());
+        rooms.add(new OutdoorKitchen());
     }
 
     private boolean isLockable(String room)
