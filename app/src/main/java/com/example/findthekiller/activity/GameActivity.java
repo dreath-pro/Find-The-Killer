@@ -28,11 +28,17 @@ import com.example.findthekiller.model.HouseModel;
 import com.example.findthekiller.model.MessageModel;
 import com.example.findthekiller.model.PlayerModel;
 import com.example.findthekiller.R;
+import com.example.findthekiller.model.rooms.BathWardrobe1;
+import com.example.findthekiller.model.rooms.BathWardrobe2;
+import com.example.findthekiller.model.rooms.Bedroom1;
+import com.example.findthekiller.model.rooms.BedroomBath1;
+import com.example.findthekiller.model.rooms.BedroomWardrobe1;
 import com.example.findthekiller.model.rooms.Dining;
 import com.example.findthekiller.model.rooms.Entry;
 import com.example.findthekiller.model.rooms.Foyer;
 import com.example.findthekiller.model.rooms.Garage1;
 import com.example.findthekiller.model.rooms.Garage2;
+import com.example.findthekiller.model.rooms.MasterBath;
 import com.example.findthekiller.model.rooms.Mud;
 import com.example.findthekiller.model.rooms.Porch1;
 import com.example.findthekiller.model.rooms.Porch2;
@@ -444,6 +450,12 @@ public class GameActivity extends AppCompatActivity {
         rooms.add(new Dining());
         rooms.add(new Foyer());
         rooms.add(new Study());
+        rooms.add(new MasterBath());
+        rooms.add(new BathWardrobe1());
+        rooms.add(new BathWardrobe2());
+        rooms.add(new Bedroom1());
+        rooms.add(new BedroomWardrobe1());
+        rooms.add(new BedroomBath1());
     }
 
     private boolean isLockable(String room)
@@ -459,6 +471,26 @@ public class GameActivity extends AppCompatActivity {
             isLockable = true;
         }
         if(room.equals("study room"))
+        {
+            isLockable = true;
+        }
+        if(room.equals("master bath"))
+        {
+            isLockable = true;
+        }
+        if(room.equals("first bath wardrobe") || room.equals("second bath wardrobe"))
+        {
+            isLockable = true;
+        }
+        if(room.equals("first bedroom"))
+        {
+            isLockable = true;
+        }
+        if(room.equals("first bedroom wardrobe"))
+        {
+            isLockable = true;
+        }
+        if(room.equals("first bedroom bath"))
         {
             isLockable = true;
         }

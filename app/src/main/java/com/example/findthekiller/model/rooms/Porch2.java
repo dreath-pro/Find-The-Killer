@@ -60,6 +60,7 @@ public class Porch2 extends HouseModel {
         soloActivities.add("sleeping");
         soloActivities.add("playing guitar");
         soloActivities.add("cat napping");
+        soloActivities.add("scrolling in my phone");
     }
 
     private void duoActivity()
@@ -75,6 +76,7 @@ public class Porch2 extends HouseModel {
         duoActivities.add("playing card");
         duoActivities.add("playing guitar");
         duoActivities.add("chilling");
+        duoActivities.add("scrolling in my phone");
     }
 
     private void duoPartnerActivity()
@@ -102,5 +104,6 @@ public class Porch2 extends HouseModel {
         groupActivities.add("group singing");
         groupActivities.add("having party chat");
         groupActivities.add("snapping some groupie photos");
+        groupActivities.add("scrolling in my phone");
     }
 }

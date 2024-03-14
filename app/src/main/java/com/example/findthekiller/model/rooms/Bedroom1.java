@@ -5,7 +5,7 @@ import com.example.findthekiller.model.HouseModel;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Foyer extends HouseModel {
+public class Bedroom1 extends HouseModel {
     private String roomActivities;
 
     private ArrayList<String> soloActivities = new ArrayList<>();
@@ -13,9 +13,9 @@ public class Foyer extends HouseModel {
     private ArrayList<String> duoPartnerActivities = new ArrayList<>();
     private ArrayList<String> groupActivities = new ArrayList<>();
 
-    public Foyer()
+    public Bedroom1()
     {
-        super("foyer room", false);
+        super("first bedroom", false);
         soloActivity();
         duoActivity();
         duoPartnerActivity();
@@ -52,31 +52,25 @@ public class Foyer extends HouseModel {
 
     private void soloActivity()
     {
-        soloActivities.add("sitting in the chair");
-        soloActivities.add("sitting in sofa");
-        soloActivities.add("playing piano");
-        soloActivities.add("watching the beautiful painting");
-        soloActivities.add("watching the beautiful sculptures");
-        soloActivities.add("watching the mirror");
-        soloActivities.add("waiting for someone");
-        soloActivities.add("taking a catnap");
+        soloActivities.add("sleeping");
+        soloActivities.add("having a deep sleep");
+        soloActivities.add("taking a rest");
+        soloActivities.add("having a nap");
+        soloActivities.add("laying in bed chilling");
         soloActivities.add("scrolling in my phone");
-        soloActivities.add("watching the beautiful view outside");
+        soloActivities.add("enjoying the fluffy bed");
     }
 
     private void duoActivity()
     {
-        duoActivities.add("sitting in the chair");
-        duoActivities.add("sitting in sofa");
-        duoActivities.add("playing piano");
-        duoActivities.add("watching the beautiful painting");
-        duoActivities.add("watching the beautiful sculptures");
-        duoActivities.add("waiting for someone");
-        duoActivities.add("taking a catnap");
-        duoActivities.add("watching the beautiful view outside");
-        duoActivities.add("talking");
+        duoActivities.add("sleeping");
+        duoActivities.add("talking in bed");
+        duoActivities.add("having a deep sleep");
+        duoActivities.add("taking a rest");
+        duoActivities.add("having a nap");
+        duoActivities.add("laying in bed chilling");
         duoActivities.add("scrolling in my phone");
-        duoActivities.add("having a deep conversation");
+        duoActivities.add("enjoying the fluffy bed");
     }
 
     private void duoPartnerActivity()
@@ -85,23 +79,24 @@ public class Foyer extends HouseModel {
         duoPartnerActivities.add("flirting");
         duoPartnerActivities.add("cuddling");
         duoPartnerActivities.add("intimate kissing");
-        duoPartnerActivities.add("having sweet talk");
         duoPartnerActivities.add("teasing");
+        duoPartnerActivities.add("masturbating");
+        duoPartnerActivities.add("french kissing");
         duoPartnerActivities.add("complimenting");
+        duoPartnerActivities.add("touching each other naked");
+        duoPartnerActivities.add("having a longest rough sex");
     }
 
     private void groupActivity()
     {
-        groupActivities.add("sitting in the chair");
-        groupActivities.add("sitting in sofa");
+        groupActivities.add("sleeping");
+        groupActivities.add("talking in bed");
+        groupActivities.add("having a deep sleep");
+        groupActivities.add("taking a rest");
+        groupActivities.add("having a nap");
+        groupActivities.add("laying in bed chilling");
         groupActivities.add("scrolling in my phone");
-        groupActivities.add("playing piano");
-        groupActivities.add("watching the beautiful painting");
-        groupActivities.add("watching the beautiful sculptures");
-        groupActivities.add("waiting for someone");
-        groupActivities.add("taking a catnap");
-        groupActivities.add("watching the beautiful view outside");
-        groupActivities.add("talking");
-        groupActivities.add("having a deep conversation");
+        groupActivities.add("enjoying the fluffy bed");
+        groupActivities.add("having a pillow fight");
     }
 }

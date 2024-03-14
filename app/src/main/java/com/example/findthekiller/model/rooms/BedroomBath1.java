@@ -1,12 +1,11 @@
 package com.example.findthekiller.model.rooms;
 
 import com.example.findthekiller.model.HouseModel;
-import com.example.findthekiller.model.PlayerModel;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Entry extends HouseModel {
+public class BedroomBath1 extends HouseModel {
     private String roomActivities;
 
     private ArrayList<String> soloActivities = new ArrayList<>();
@@ -14,9 +13,9 @@ public class Entry extends HouseModel {
     private ArrayList<String> duoPartnerActivities = new ArrayList<>();
     private ArrayList<String> groupActivities = new ArrayList<>();
 
-    public Entry()
+    public BedroomBath1()
     {
-        super("entrance", false);
+        super("first bedroom bath", false);
         soloActivity();
         duoActivity();
         duoPartnerActivity();
@@ -53,40 +52,46 @@ public class Entry extends HouseModel {
 
     private void soloActivity()
     {
-        soloActivities.add("sitting in sofa");
-        soloActivities.add("sitting in chair");
-        soloActivities.add("viewing the mirror");
-        soloActivities.add("watching the beautiful decorations");
-        soloActivities.add("waiting at someone");
-        soloActivities.add("scrolling in my phone");
+        soloActivities.add("bathing");
+        soloActivities.add("half bathing");
+        soloActivities.add("relaxing in the tub");
+        soloActivities.add("showering");
+        soloActivities.add("chilling in the tub");
+        soloActivities.add("having some warm bath");
     }
 
     private void duoActivity()
     {
-        duoActivities.add("chit chatting");
-        duoActivities.add("meeting");
-        duoActivities.add("starring");
-        duoActivities.add("sitting in sofa");
-        duoActivities.add("sitting in chair");
-        duoActivities.add("teasing");
-        duoActivities.add("messing");
-        duoActivities.add("scrolling in my phone");
+        duoActivities.add("waiting");
+        duoActivities.add("waiting while talking");
+        duoActivities.add("brushing my teeth while waiting");
+        duoActivities.add("combing my hair while waiting");
+        duoActivities.add("fixing my face");
+        duoActivities.add("maintaining my hygiene");
     }
 
     private void duoPartnerActivity()
     {
-        duoPartnerActivities.add("making out");
-        duoPartnerActivities.add("flirting");
-        duoPartnerActivities.add("cuddling");
-        duoPartnerActivities.add("intimate kissing");
-        duoPartnerActivities.add("teasing");
+        duoPartnerActivities.add("bathing");
+        duoPartnerActivities.add("half bathing");
+        duoPartnerActivities.add("relaxing in the tub");
+        duoPartnerActivities.add("showering");
+        duoPartnerActivities.add("having a rough sex");
+        duoPartnerActivities.add("having a slow and intimate sex");
+        duoPartnerActivities.add("chilling in the tub");
+        duoPartnerActivities.add("having some warm bath");
+        duoPartnerActivities.add("making out while bathing");
     }
 
     private void groupActivity()
     {
-        groupActivities.add("sitting in chair");
-        groupActivities.add("sitting in sofa");
-        groupActivities.add("staying");
-        groupActivities.add("scrolling in my phone");
+        groupActivities.add("waiting");
+        groupActivities.add("waiting while talking");
+        groupActivities.add("brushing my teeth while waiting");
+        groupActivities.add("combing my hair while waiting");
+        groupActivities.add("fixing my face");
+        groupActivities.add("having a group fuck");
+        groupActivities.add("doing gangbang");
+        groupActivities.add("maintaining my hygiene");
     }
 }
