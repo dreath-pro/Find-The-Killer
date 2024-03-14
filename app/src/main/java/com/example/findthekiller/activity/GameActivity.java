@@ -28,10 +28,16 @@ import com.example.findthekiller.model.HouseModel;
 import com.example.findthekiller.model.MessageModel;
 import com.example.findthekiller.model.PlayerModel;
 import com.example.findthekiller.R;
+import com.example.findthekiller.model.rooms.Dining;
 import com.example.findthekiller.model.rooms.Entry;
+import com.example.findthekiller.model.rooms.Foyer;
 import com.example.findthekiller.model.rooms.Garage1;
 import com.example.findthekiller.model.rooms.Garage2;
+import com.example.findthekiller.model.rooms.Mud;
 import com.example.findthekiller.model.rooms.Porch1;
+import com.example.findthekiller.model.rooms.Porch2;
+import com.example.findthekiller.model.rooms.Study;
+import com.example.findthekiller.model.rooms.Util;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -430,8 +436,14 @@ public class GameActivity extends AppCompatActivity {
     private void initializeRoom() {
         rooms.add(new Entry());
         rooms.add(new Porch1());
+        rooms.add(new Porch2());
         rooms.add(new Garage1());
         rooms.add(new Garage2());
+        rooms.add(new Util());
+        rooms.add(new Mud());
+        rooms.add(new Dining());
+        rooms.add(new Foyer());
+        rooms.add(new Study());
     }
 
     private boolean isLockable(String room)
@@ -439,6 +451,14 @@ public class GameActivity extends AppCompatActivity {
         boolean isLockable = false;
 
         if(room.equals("first garage") || room.equals("second garage"))
+        {
+            isLockable = true;
+        }
+        if(room.equals("utility room"))
+        {
+            isLockable = true;
+        }
+        if(room.equals("study room"))
         {
             isLockable = true;
         }
