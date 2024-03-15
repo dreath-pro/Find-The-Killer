@@ -160,7 +160,7 @@ public class MessageModel {
                 message.append(firstWordCasing(playerModel.getActivity())).append(groupChat).append(" at the ").append(playerModel.getRoom()).append(". That's how I spent the moments of the incident.");
                 break;
             case 5:
-                message.append("At the time of the incident, I found myself ").append(playerModel.getActivity()).append(groupChat).append(" at the ").append(playerModel.getRoom()).append(" creating a backdrop of laughter and camaraderie.");
+                message.append("At the time of the incident, I found myself ").append(playerModel.getActivity()).append(groupChat).append(" at the ").append(playerModel.getRoom()).append(" creating a backdrop of memory.");
                 break;
             case 6:
                 message.append("As the incident transpired, I found myself ").append(playerModel.getActivity()).append(" surrounded by the atmosphere").append(groupChat).append(" at the ").append(playerModel.getRoom()).append(".");
