@@ -1,5 +1,6 @@
 package com.example.findthekiller.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +34,7 @@ public class LineupActivity extends AppCompatActivity {
     TextView lineupPrompt;
     Button skipButton;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
