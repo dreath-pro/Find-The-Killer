@@ -28,14 +28,4 @@ public abstract class HouseModel {
     public void setLock(boolean lock) {
         isLock = lock;
     }
-
-    //    private void initializeRooms()
-//    {
-//        rooms.add("First Covered Lanai");
-//        rooms.add("Second Covered Lanai");
-//        rooms.add("Master Suite");
-//        rooms.add("Sitting Area");
-//        rooms.add("Pool Area");
-//        rooms.add("Backyard");
-//    }
 }

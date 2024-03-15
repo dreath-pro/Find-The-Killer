@@ -39,20 +39,26 @@ import com.example.findthekiller.model.rooms.BedroomBath3;
 import com.example.findthekiller.model.rooms.BedroomWardrobe1;
 import com.example.findthekiller.model.rooms.BedroomWardrobe2;
 import com.example.findthekiller.model.rooms.BedroomWardrobe3;
+import com.example.findthekiller.model.rooms.CoveredLanai1;
+import com.example.findthekiller.model.rooms.CoveredLanai2;
 import com.example.findthekiller.model.rooms.Dinette;
 import com.example.findthekiller.model.rooms.Dining;
 import com.example.findthekiller.model.rooms.Entry;
 import com.example.findthekiller.model.rooms.Foyer;
 import com.example.findthekiller.model.rooms.Garage1;
 import com.example.findthekiller.model.rooms.Garage2;
+import com.example.findthekiller.model.rooms.Garden;
 import com.example.findthekiller.model.rooms.GreatRoom;
 import com.example.findthekiller.model.rooms.Kitchen;
 import com.example.findthekiller.model.rooms.MasterBath;
+import com.example.findthekiller.model.rooms.MasterSuite;
 import com.example.findthekiller.model.rooms.MorningBar;
 import com.example.findthekiller.model.rooms.Mud;
 import com.example.findthekiller.model.rooms.OutdoorKitchen;
+import com.example.findthekiller.model.rooms.PoolArea;
 import com.example.findthekiller.model.rooms.Porch1;
 import com.example.findthekiller.model.rooms.Porch2;
+import com.example.findthekiller.model.rooms.SittingArea;
 import com.example.findthekiller.model.rooms.Study;
 import com.example.findthekiller.model.rooms.Util;
 import com.example.findthekiller.model.rooms.WetBar;
@@ -480,6 +486,12 @@ public class GameActivity extends AppCompatActivity {
         rooms.add(new Kitchen());
         rooms.add(new Dinette());
         rooms.add(new WetBar());
+        rooms.add(new CoveredLanai1());
+        rooms.add(new CoveredLanai2());
+        rooms.add(new MasterSuite());
+        rooms.add(new SittingArea());
+        rooms.add(new PoolArea());
+        rooms.add(new Garden());
     }
 
     private boolean isLockable(String room)
@@ -519,6 +531,10 @@ public class GameActivity extends AppCompatActivity {
             isLockable = true;
         }
         if(room.equals("wet bar"))
+        {
+            isLockable = true;
+        }
+        if(room.equals("master suite room"))
         {
             isLockable = true;
         }
