@@ -52,24 +52,16 @@ public class Dining extends HouseModel {
 
     private void soloActivity()
     {
-        soloActivities.add("eating");
-        soloActivities.add("eating breakfast");
-        soloActivities.add("eating lunch");
-        soloActivities.add("eating dinner");
+        soloActivities.add("eating foods and fruits");
         soloActivities.add("eating my favorite dish");
     }
 
     private void duoActivity()
     {
-        duoActivities.add("eating");
-        duoActivities.add("eating breakfast");
-        duoActivities.add("eating lunch");
-        duoActivities.add("eating dinner");
+        duoActivities.add("eating foods and fruits");
         duoActivities.add("eating my favorite dish");
         duoActivities.add("eating while talking");
-        duoActivities.add("eating breakfast while talking");
-        duoActivities.add("eating lunch while talking");
-        duoActivities.add("eating dinner while talking");
+        duoActivities.add("eating food while talking");
         duoActivities.add("eating my favorite dish while talking");
         duoActivities.add("making fun while eating");
     }
@@ -84,15 +76,10 @@ public class Dining extends HouseModel {
 
     private void groupActivity()
     {
-        groupActivities.add("eating");
-        groupActivities.add("eating breakfast");
-        groupActivities.add("eating lunch");
-        groupActivities.add("eating dinner");
+        groupActivities.add("eating foods and fruits");
         groupActivities.add("eating my favorite dish");
         groupActivities.add("eating while talking");
-        groupActivities.add("eating breakfast while talking");
-        groupActivities.add("eating lunch while talking");
-        groupActivities.add("eating dinner while talking");
+        groupActivities.add("eating food while talking");
         groupActivities.add("eating my favorite dish while talking");
         groupActivities.add("making fun while eating");
     }

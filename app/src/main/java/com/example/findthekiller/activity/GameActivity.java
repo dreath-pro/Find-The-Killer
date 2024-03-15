@@ -237,28 +237,20 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public void updatePlayerCount(boolean toEliminate) {
-        if (!toEliminate) {
-            for (PlayerModel players : playerModels) {
-                if (!players.isEliminated()) {
-                    if (players.getRole().equals("Killer")) {
-                        killerCount++;
-                    } else {
-                        survivorCount++;
-                    }
-                }
-            }
-        } else {
-            if (selectedPlayer.getRole().equals("Killer")) {
-                killerCount--;
-            } else {
-                survivorCount--;
-            }
+        killerCount = 0;
+        survivorCount = 0;
 
-            if (killerCount < 0) {
-                killerCount = 0;
-            }
-            if (survivorCount < 0) {
-                survivorCount = 0;
+        for(PlayerModel player : playerModels)
+        {
+            if(!player.isEliminated())
+            {
+                if(player.getRole().equals("Killer"))
+                {
+                    killerCount++;
+                }else
+                {
+                    survivorCount++;
+                }
             }
         }
 
@@ -274,10 +266,8 @@ public class GameActivity extends AppCompatActivity {
         GameActivity.selectedIndex = selectedIndex;
     }
 
-    private void isPlayerValid()
-    {
-        for(int i = 0; i <= playerModels.size() - 1; i++)
-        {
+    private void isPlayerValid() {
+        for (int i = 0; i <= playerModels.size() - 1; i++) {
             if (playerModels.get(i).getRole().equals("Killer")) {
                 playerModels.get(i).setValid(false);
             }
@@ -293,23 +283,36 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isValidLow()
-    {
+    private void isValidPrey() {
+        for (int i = 0; i <= playerModels.size() - 1; i++) {
+            playerModels.get(i).setValid(true);
+        }
+
+        for (int i = 0; i <= playerModels.size() - 1; i++) {
+            if (playerModels.get(i).getRole().equals("Killer")) {
+                playerModels.get(i).setValid(false);
+            }
+            if (playerModels.get(i).isEliminated()) {
+                playerModels.get(i).setValid(false);
+            }
+            if (!playerModels.get(i).getGroups().isEmpty()) {
+                playerModels.get(i).setValid(false);
+            }
+        }
+    }
+
+    private boolean isValidLow() {
         int validCount = 0;
         boolean result;
 
-        for(PlayerModel playerModel : playerModels)
-        {
-            if(playerModel.isValid())
-            {
+        for (PlayerModel playerModel : playerModels) {
+            if (playerModel.isValid()) {
                 validCount++;
             }
         }
-        if(validCount <= 1)
-        {
+        if (validCount <= 1) {
             result = true;
-        }else
-        {
+        } else {
             result = false;
         }
 
@@ -318,9 +321,8 @@ public class GameActivity extends AppCompatActivity {
 
     private void assignSurvivors() {
         int numberOfPerson = 0, selectedPerson = 0;
-        int validCount = 0;
         String selectedRoom = "", selectedActivity = "";
-        double reducedSurvivorCount = survivorCount * .20;
+        double reducedSurvivorCount = survivorCount * .18;
 
         for (int i = 0; i <= playerModels.size() - 1; i++) {
             playerModels.get(i).clearGroup();
@@ -328,36 +330,27 @@ public class GameActivity extends AppCompatActivity {
             playerModels.get(i).setActivity("");
             playerModels.get(i).setValid(true);
 
-            for(HouseModel room : rooms)
-            {
+            for (HouseModel room : rooms) {
                 room.setLock(false);
             }
         }
 
         isPlayerValid();
 
-        for(int i = 0; i <= playerModels.size() - 1; i++)
-        {
+        for (int i = 0; i <= playerModels.size() - 1; i++) {
             if (playerModels.get(i).isValid()) {
-                numberOfPerson = random.nextInt((int) reducedSurvivorCount);
+                double positiveDouble = (int) reducedSurvivorCount;
+                if((int)positiveDouble < 1)
+                {
+                    positiveDouble = 1;
+                }
 
-                for(PlayerModel playerModel : playerModels)
-                {
-                    if(playerModel.isValid())
-                    {
-                        validCount++;
-                    }
-                }
-                if(validCount <= 1)
-                {
-                    numberOfPerson = 0;
-                }
+                numberOfPerson = random.nextInt((int)positiveDouble);
 
                 selectedPerson = random.nextInt(playerModels.size());
                 while (playerModels.get(i).getName().equals(playerModels.get(selectedPerson).getName())
-                    || !playerModels.get(selectedPerson).isValid()) {
-                    if(isValidLow())
-                    {
+                        || !playerModels.get(selectedPerson).isValid()) {
+                    if (isValidLow()) {
                         numberOfPerson = 0;
                         break;
                     }
@@ -365,8 +358,7 @@ public class GameActivity extends AppCompatActivity {
                 }
 
                 int roomSelection = random.nextInt(rooms.size());
-                while(rooms.get(roomSelection).isLock())
-                {
+                while (rooms.get(roomSelection).isLock()) {
                     roomSelection = random.nextInt(rooms.size());
                 }
                 selectedRoom = rooms.get(roomSelection).getRoomName();
@@ -379,8 +371,7 @@ public class GameActivity extends AppCompatActivity {
                         if (!playerModels.get(i).getGender().equals(playerModels.get(selectedPerson).getGender())) {
                             int toPartner = random.nextInt(2);
                             if (toPartner == 0) {
-                                if(isLockable(rooms.get(roomSelection).getRoomName()))
-                                {
+                                if (isLockable(rooms.get(roomSelection).getRoomName())) {
                                     rooms.get(roomSelection).setLock(true);
                                 }
                                 selectedActivity = rooms.get(roomSelection).getActivity(2);
@@ -399,8 +390,7 @@ public class GameActivity extends AppCompatActivity {
                 for (int j = 1; j <= numberOfPerson; j++) {
                     while (playerModels.get(i).getName().equals(playerModels.get(selectedPerson).getName())
                             || !playerModels.get(selectedPerson).isValid()) {
-                        if(isValidLow())
-                        {
+                        if (isValidLow()) {
                             break;
                         }
                         selectedPerson = random.nextInt(playerModels.size());
@@ -433,24 +423,21 @@ public class GameActivity extends AppCompatActivity {
 
         while (!isReported) {
             assignSurvivors();
+            isValidPrey();
             for (int i = 0; i <= playerModels.size() - 1; i++) {
-                if (!playerModels.get(i).getRole().equals("Killer")) {
-                    if (playerModels.get(i).getGroups().isEmpty()) {
-                        if (!playerModels.get(i).isEliminated()) {
-                            if (survivorCount <= 1) {
-                                afterGame(false);
-                            } else {
-                                playerModels.get(i).setEliminated(true);
-                                interrogationAdapter.notifyItemChanged(selectedIndex);
+                if (playerModels.get(i).isValid()) {
+                    if (survivorCount <= 1) {
+                        afterGame(false);
+                    } else {
+                        playerModels.get(i).setEliminated(true);
+                        interrogationAdapter.notifyItemChanged(selectedIndex);
 
-                                updatePlayerCount(true);
-                                changeFocusChat();
-                                isReported = true;
+                        updatePlayerCount(true);
+                        changeFocusChat();
+                        isReported = true;
 
-                                Toast.makeText(this, playerModels.get(i).getName() + "'s corpse been found!", Toast.LENGTH_SHORT).show();
-                                break;
-                            }
-                        }
+                        Toast.makeText(this, playerModels.get(i).getName() + "'s corpse been found!", Toast.LENGTH_SHORT).show();
+                        break;
                     }
                 }
             }
@@ -494,48 +481,37 @@ public class GameActivity extends AppCompatActivity {
         rooms.add(new Garden());
     }
 
-    private boolean isLockable(String room)
-    {
+    private boolean isLockable(String room) {
         boolean isLockable = false;
 
-        if(room.equals("first garage") || room.equals("second garage"))
-        {
+        if (room.equals("first garage") || room.equals("second garage")) {
             isLockable = true;
         }
-        if(room.equals("utility room"))
-        {
+        if (room.equals("utility room")) {
             isLockable = true;
         }
-        if(room.equals("study room"))
-        {
+        if (room.equals("study room")) {
             isLockable = true;
         }
-        if(room.equals("master bath"))
-        {
+        if (room.equals("master bath")) {
             isLockable = true;
         }
-        if(room.equals("first bath wardrobe") || room.equals("second bath wardrobe"))
-        {
+        if (room.equals("first bath wardrobe") || room.equals("second bath wardrobe")) {
             isLockable = true;
         }
-        if(room.equals("first bedroom") || room.equals("second bedroom") || room.equals("third bedroom"))
-        {
+        if (room.equals("first bedroom") || room.equals("second bedroom") || room.equals("third bedroom")) {
             isLockable = true;
         }
-        if(room.equals("first bedroom wardrobe") || room.equals("second bedroom wardrobe") || room.equals("third bedroom wardrobe"))
-        {
+        if (room.equals("first bedroom wardrobe") || room.equals("second bedroom wardrobe") || room.equals("third bedroom wardrobe")) {
             isLockable = true;
         }
-        if(room.equals("first bedroom bath") || room.equals("second bedroom bath") || room.equals("third bedroom bath"))
-        {
+        if (room.equals("first bedroom bath") || room.equals("second bedroom bath") || room.equals("third bedroom bath")) {
             isLockable = true;
         }
-        if(room.equals("wet bar"))
-        {
+        if (room.equals("wet bar")) {
             isLockable = true;
         }
-        if(room.equals("master suite room"))
-        {
+        if (room.equals("master suite room")) {
             isLockable = true;
         }
 

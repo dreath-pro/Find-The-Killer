@@ -44,7 +44,7 @@ public class LineupActivity extends AppCompatActivity {
         skipButton = findViewById(R.id.skipButton);
 
         addCharacter();
-        for (int i = 1; i <= 20; i++) {
+        for (int i = 1; i <= 30; i++) {
             int characterSelection = random.nextInt(character.size());
 
             playerModels.add(new PlayerModel(character.get(characterSelection).getName(), character.get(characterSelection).getGender(), null,
