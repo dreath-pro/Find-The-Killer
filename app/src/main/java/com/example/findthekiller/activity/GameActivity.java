@@ -39,18 +39,23 @@ import com.example.findthekiller.model.rooms.BedroomBath3;
 import com.example.findthekiller.model.rooms.BedroomWardrobe1;
 import com.example.findthekiller.model.rooms.BedroomWardrobe2;
 import com.example.findthekiller.model.rooms.BedroomWardrobe3;
+import com.example.findthekiller.model.rooms.Dinette;
 import com.example.findthekiller.model.rooms.Dining;
 import com.example.findthekiller.model.rooms.Entry;
 import com.example.findthekiller.model.rooms.Foyer;
 import com.example.findthekiller.model.rooms.Garage1;
 import com.example.findthekiller.model.rooms.Garage2;
+import com.example.findthekiller.model.rooms.GreatRoom;
+import com.example.findthekiller.model.rooms.Kitchen;
 import com.example.findthekiller.model.rooms.MasterBath;
+import com.example.findthekiller.model.rooms.MorningBar;
 import com.example.findthekiller.model.rooms.Mud;
 import com.example.findthekiller.model.rooms.OutdoorKitchen;
 import com.example.findthekiller.model.rooms.Porch1;
 import com.example.findthekiller.model.rooms.Porch2;
 import com.example.findthekiller.model.rooms.Study;
 import com.example.findthekiller.model.rooms.Util;
+import com.example.findthekiller.model.rooms.WetBar;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -470,6 +475,11 @@ public class GameActivity extends AppCompatActivity {
         rooms.add(new BedroomWardrobe3());
         rooms.add(new BedroomBath3());
         rooms.add(new OutdoorKitchen());
+        rooms.add(new MorningBar());
+        rooms.add(new GreatRoom());
+        rooms.add(new Kitchen());
+        rooms.add(new Dinette());
+        rooms.add(new WetBar());
     }
 
     private boolean isLockable(String room)
@@ -505,6 +515,10 @@ public class GameActivity extends AppCompatActivity {
             isLockable = true;
         }
         if(room.equals("first bedroom bath") || room.equals("second bedroom bath") || room.equals("third bedroom bath"))
+        {
+            isLockable = true;
+        }
+        if(room.equals("wet bar"))
         {
             isLockable = true;
         }
