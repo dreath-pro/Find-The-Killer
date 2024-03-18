@@ -87,6 +87,19 @@
 
     </RelativeLayout>
 
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/next_button"
+        android:textColor="@color/black"
+        android:backgroundTint="#7BC2D8"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/playerInterrogation"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <LinearLayout
         android:id="@+id/interactionLayout"
         android:layout_width="match_parent"

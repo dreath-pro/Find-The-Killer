@@ -71,7 +71,7 @@ import java.util.Random;
 public class GameActivity extends AppCompatActivity {
     TextView chatBox;
     TextView survivorNumber, killerNumber;
-    Button inspectButton, suspectButton, askButton, quitButton;
+    Button inspectButton, suspectButton, askButton, quitButton, nextButton;
     RecyclerView playerInterrogation;
 
     private SpannableStringBuilder builder = new SpannableStringBuilder();
@@ -100,6 +100,7 @@ public class GameActivity extends AppCompatActivity {
         suspectButton = findViewById(R.id.suspectButton);
         askButton = findViewById(R.id.askButton);
         quitButton = findViewById(R.id.quitButton);
+        nextButton = findViewById(R.id.nextButton);
 
         playerModels = getIntent().getParcelableArrayListExtra("playerModels");
 
@@ -126,7 +127,7 @@ public class GameActivity extends AppCompatActivity {
         inspectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                assignSurvivors();
+
             }
         });
 
@@ -148,10 +149,6 @@ public class GameActivity extends AppCompatActivity {
                 } else {
                     showSuspectResult();
                     changeFocusChat();
-
-                    componentActivation(false);
-                    killerMove();
-                    componentActivation(true);
                 }
             }
         });
@@ -170,6 +167,31 @@ public class GameActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                componentActivation(false);
+                killerMove();
+                componentActivation(true);
+
+                updatePlayerCount(true);
+                if (survivorCount <= 1) {
+                    //triggers lose fragment
+                    componentActivation(false);
+                    afterGame(false);
+                } else if (killerCount == 0) {
+                    //triggers win fragment
+                    componentActivation(false);
+                    afterGame(true);
+                } else {
+//                    showSuspectResult();
+//                    changeFocusChat();
+                }
+
+                interrogationAdapter.notifyItemChanged(selectedIndex);
             }
         });
 
@@ -226,6 +248,7 @@ public class GameActivity extends AppCompatActivity {
         inspectButton.setEnabled(activate);
         suspectButton.setEnabled(activate);
         askButton.setEnabled(activate);
+        nextButton.setEnabled(activate);
     }
 
     private void indexValidation() {
@@ -283,7 +306,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void isValidPrey() {
+    private void isValidPrey(boolean forAllibi) {
         for (int i = 0; i <= playerModels.size() - 1; i++) {
             playerModels.get(i).setValid(true);
         }
@@ -295,8 +318,11 @@ public class GameActivity extends AppCompatActivity {
             if (playerModels.get(i).isEliminated()) {
                 playerModels.get(i).setValid(false);
             }
-            if (!playerModels.get(i).getGroups().isEmpty()) {
-                playerModels.get(i).setValid(false);
+            if(!forAllibi)
+            {
+                if (!playerModels.get(i).getGroups().isEmpty()) {
+                    playerModels.get(i).setValid(false);
+                }
             }
         }
     }
@@ -420,12 +446,97 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
+    private void assignKillers()
+    {
+        int numberOfPerson = 0, selectedPerson = 0;
+        String selectedRoom = "", selectedActivity = "";
+        double reducedSurvivorCount = survivorCount * .18;
+
+        isPlayerValid();
+
+        for (int i = 0; i <= playerModels.size() - 1; i++) {
+            if (playerModels.get(i).getRole().equals("Killer")) {
+                double positiveDouble = (int) reducedSurvivorCount;
+                if((int)positiveDouble < 1)
+                {
+                    positiveDouble = 1;
+                }
+
+                numberOfPerson = random.nextInt((int)positiveDouble);
+
+                selectedPerson = random.nextInt(playerModels.size());
+                while (playerModels.get(i).getName().equals(playerModels.get(selectedPerson).getName())
+                        || !playerModels.get(selectedPerson).isValid()) {
+                    if (isValidLow()) {
+                        numberOfPerson = 0;
+                        break;
+                    }
+                    selectedPerson = random.nextInt(playerModels.size());
+                }
+
+                int roomSelection = random.nextInt(rooms.size());
+                while (rooms.get(roomSelection).isLock()) {
+                    roomSelection = random.nextInt(rooms.size());
+                }
+                selectedRoom = rooms.get(roomSelection).getRoomName();
+
+                switch (numberOfPerson) {
+                    case 0:
+                        selectedActivity = rooms.get(roomSelection).getActivity(0);
+                        break;
+                    case 1:
+                        if (!playerModels.get(i).getGender().equals(playerModels.get(selectedPerson).getGender())) {
+                            int toPartner = random.nextInt(2);
+                            if (toPartner == 0) {
+                                if (isLockable(rooms.get(roomSelection).getRoomName())) {
+                                    rooms.get(roomSelection).setLock(true);
+                                }
+                                selectedActivity = rooms.get(roomSelection).getActivity(2);
+                            } else {
+                                selectedActivity = rooms.get(roomSelection).getActivity(1);
+                            }
+                        } else {
+                            selectedActivity = rooms.get(roomSelection).getActivity(1);
+                        }
+                        break;
+                    default:
+                        selectedActivity = rooms.get(roomSelection).getActivity(3);
+                        break;
+                }
+
+                for (int j = 1; j <= numberOfPerson; j++) {
+                    if (isValidLow()) {
+                        break;
+                    }
+
+                    while (playerModels.get(i).getName().equals(playerModels.get(selectedPerson).getName())
+                            || !playerModels.get(selectedPerson).isValid()) {
+                        selectedPerson = random.nextInt(playerModels.size());
+                    }
+
+                    playerModels.get(i).addGroup(playerModels.get(selectedPerson));
+                    for (int groupIdx = 0; groupIdx <= playerModels.get(selectedPerson).getGroups().size() - 1; groupIdx++) {
+                        playerModels.get(i).addGroup(playerModels.get(selectedPerson).getGroups().get(groupIdx));
+                    }
+
+                    selectedPerson = random.nextInt(playerModels.size());
+                }
+
+                playerModels.get(i).setActivity(selectedActivity);
+                playerModels.get(i).setRoom(selectedRoom);
+            }
+        }
+    }
+
     private void killerMove() {
         boolean isReported = false;
 
         while (!isReported) {
             assignSurvivors();
-            isValidPrey();
+            isValidPrey(true);
+            assignKillers();
+            isValidPrey(false);
+
             for (int i = 0; i <= playerModels.size() - 1; i++) {
                 if (playerModels.get(i).isValid()) {
                     if (survivorCount <= 1) {
