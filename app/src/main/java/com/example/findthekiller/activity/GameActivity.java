@@ -388,11 +388,12 @@ public class GameActivity extends AppCompatActivity {
                 }
 
                 for (int j = 1; j <= numberOfPerson; j++) {
+                    if (isValidLow()) {
+                        break;
+                    }
+
                     while (playerModels.get(i).getName().equals(playerModels.get(selectedPerson).getName())
                             || !playerModels.get(selectedPerson).isValid()) {
-                        if (isValidLow()) {
-                            break;
-                        }
                         selectedPerson = random.nextInt(playerModels.size());
                     }
 
@@ -407,6 +408,7 @@ public class GameActivity extends AppCompatActivity {
 
                     playerModels.get(selectedPerson).setActivity(selectedActivity);
                     playerModels.get(selectedPerson).setRoom(selectedRoom);
+                    isPlayerValid();
 
                     selectedPerson = random.nextInt(playerModels.size());
                 }
