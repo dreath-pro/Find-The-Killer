@@ -357,6 +357,7 @@ public class GameActivity extends AppCompatActivity {
             playerModels.get(i).setValid(true);
 
             for (HouseModel room : rooms) {
+                room.clearOccupants();
                 room.setLock(false);
             }
         }
@@ -434,6 +435,7 @@ public class GameActivity extends AppCompatActivity {
 
                     playerModels.get(selectedPerson).setActivity(selectedActivity);
                     playerModels.get(selectedPerson).setRoom(selectedRoom);
+                    rooms.get(roomSelection).addOccupants(playerModels.get(selectedPerson));
                     isPlayerValid();
 
                     selectedPerson = random.nextInt(playerModels.size());
@@ -441,6 +443,7 @@ public class GameActivity extends AppCompatActivity {
 
                 playerModels.get(i).setActivity(selectedActivity);
                 playerModels.get(i).setRoom(selectedRoom);
+                rooms.get(roomSelection).addOccupants(playerModels.get(i));
             }
             isPlayerValid();
         }
