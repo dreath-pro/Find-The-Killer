@@ -6,25 +6,12 @@
     tools:context=".fragment.EliminationFragment"
     android:background="#303842">
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20sp"
-        android:layout_marginTop="20sp"
-        android:fontFamily="@font/nightcat"
-        android:paddingStart="30sp"
-        android:paddingEnd="30sp"
-        android:backgroundTint="#3E498C"
-        android:textColor="@color/white"
-        android:text="Back"
-        android:textSize="30sp"/>
-
     <LinearLayout
         android:id="@+id/playerStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
         android:orientation="vertical">
 
         <ImageView
@@ -135,5 +122,20 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/nightcat"
+        android:paddingStart="30sp"
+        android:paddingEnd="30sp"
+        android:backgroundTint="#3E498C"
+        android:textColor="@color/white"
+        android:text="@string/back_buttons"
+        android:layout_below="@+id/playerStatus"
+        android:textSize="30sp"/>
 
 </RelativeLayout>

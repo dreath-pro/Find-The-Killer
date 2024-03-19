@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.findthekiller.fragment.AftergameFragment;
 import com.example.findthekiller.fragment.EliminationFragment;
 import com.example.findthekiller.adapter.InterrogationAdapter;
+import com.example.findthekiller.fragment.KilledFragment;
 import com.example.findthekiller.model.HouseModel;
 import com.example.findthekiller.model.MessageModel;
 import com.example.findthekiller.model.PlayerModel;
@@ -186,9 +187,6 @@ public class GameActivity extends AppCompatActivity {
                     //triggers win fragment
                     componentActivation(false);
                     afterGame(true);
-                } else {
-//                    showSuspectResult();
-//                    changeFocusChat();
                 }
 
                 interrogationAdapter.notifyItemChanged(selectedIndex);
@@ -225,6 +223,16 @@ public class GameActivity extends AppCompatActivity {
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.gameLayout, eliminationFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    private void showPlayerKilled(PlayerModel killedPlayer)
+    {
+        Fragment killedFragment = new KilledFragment(killedPlayer);
+
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.gameLayout, killedFragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
@@ -390,13 +398,27 @@ public class GameActivity extends AppCompatActivity {
                 }
                 selectedRoom = rooms.get(roomSelection).getRoomName();
 
+                int toPartner = random.nextInt(2);
+                if(numberOfPerson == 1)
+                {
+                    if (toPartner == 0) {
+                        while(!rooms.get(roomSelection).getOccupants().isEmpty())
+                        {
+                            roomSelection = random.nextInt(rooms.size());
+                            while (rooms.get(roomSelection).isLock()) {
+                                roomSelection = random.nextInt(rooms.size());
+                            }
+                            selectedRoom = rooms.get(roomSelection).getRoomName();
+                        }
+                    }
+                }
+
                 switch (numberOfPerson) {
                     case 0:
                         selectedActivity = rooms.get(roomSelection).getActivity(0);
                         break;
                     case 1:
                         if (!playerModels.get(i).getGender().equals(playerModels.get(selectedPerson).getGender())) {
-                            int toPartner = random.nextInt(2);
                             if (toPartner == 0) {
                                 if (isLockable(rooms.get(roomSelection).getRoomName())) {
                                     rooms.get(roomSelection).setLock(true);
@@ -550,6 +572,7 @@ public class GameActivity extends AppCompatActivity {
 
                         updatePlayerCount(true);
                         changeFocusChat();
+                        showPlayerKilled(playerModels.get(i));
                         isReported = true;
 
                         Toast.makeText(this, playerModels.get(i).getName() + "'s corpse been found!", Toast.LENGTH_SHORT).show();

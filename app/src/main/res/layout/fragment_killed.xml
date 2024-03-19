@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.KilledFragment"
+    android:background="#938686">
+
+    <TextView
+        android:id="@+id/playerKilledText"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:text="@string/player_killed_prompt"
+        android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:fontFamily="@font/nightcat"/>
+
+    <ImageView
+        android:id="@+id/deathImage"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_below="@+id/playerKilledText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/death"/>
+
+    <LinearLayout
+        android:id="@+id/playerDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/deathImage"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal"
+        android:layout_marginTop="20sp"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:id="@+id/indicators"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_marginEnd="35sp">
+
+            <TextView
+                android:id="@+id/nameIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name_indicator"
+                android:textSize="28sp"
+                android:layout_marginTop="25sp"
+                android:layout_gravity="center"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:id="@+id/genderIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gender_indicator"
+                android:textSize="28sp"
+                android:layout_marginTop="25sp"
+                android:layout_gravity="center"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:id="@+id/roleIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/role_indicator"
+                android:textSize="28sp"
+                android:layout_marginTop="25sp"
+                android:layout_gravity="center"
+                android:textColor="#000000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/playerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/player_name"
+                android:textSize="28sp"
+                android:layout_marginTop="25sp"
+                android:layout_gravity="center"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:id="@+id/playerGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/player_gender"
+                android:textSize="28sp"
+                android:layout_marginTop="25sp"
+                android:layout_gravity="center"
+                android:textColor="#000000"/>
+
+            <TextView
+                android:id="@+id/playerRole"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/player_role"
+                android:textSize="28sp"
+                android:layout_marginTop="25sp"
+                android:layout_gravity="center"
+                android:textColor="#000000"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20sp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/nightcat"
+        android:paddingStart="30sp"
+        android:paddingEnd="30sp"
+        android:backgroundTint="#2A2C2C"
+        android:textColor="@color/white"
+        android:text="@string/back_buttons"
+        android:layout_below="@+id/playerDetails"
+        android:textSize="30sp"/>
+
+</RelativeLayout>

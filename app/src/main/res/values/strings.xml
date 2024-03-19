@@ -28,10 +28,8 @@
 
     <string name="name_indicator">Name:</string>
     <string name="player_name">Player</string>
-
     <string name="gender_indicator">Gender:</string>
     <string name="player_gender">Male</string>
-
     <string name="role_indicator">Role: </string>
     <string name="player_role">Family</string>
 
@@ -39,4 +37,10 @@
     <string name="menu_button">Menu</string>
     <string name="found_killers">You found nothing!</string>
     <string name="killer_list">There is no killer.</string>
+
+<!--    fragment back buttons-->
+    <string name="back_buttons">Back</string>
+
+<!--    killed fragment-->
+    <string name="player_killed_prompt">Player\'s corpse has been found!</string>
 </resources>

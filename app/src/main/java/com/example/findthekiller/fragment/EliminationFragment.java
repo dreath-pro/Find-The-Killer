@@ -26,7 +26,7 @@ public class EliminationFragment extends Fragment {
     TextView resultPrompt;
     TextView playerName, playerGender, playerRole;
     Button backButton;
-    PlayerModel selectedPlayer;
+    private PlayerModel selectedPlayer;
 
     private Handler handler = new Handler();
     int survivorColor, killerColor;
