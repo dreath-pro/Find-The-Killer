@@ -152,16 +152,21 @@ public class LineupActivity extends AppCompatActivity {
 
     private void addCharacter() {
         character.add(new CharacterModel(R.drawable.alice, "Alice", "Female"));
+        character.add(new CharacterModel(R.drawable.vanessa, "Vanessa", "Female"));
+        character.add(new CharacterModel(R.drawable.kyla, "Kyla", "Female"));
+        character.add(new CharacterModel(R.drawable.may, "May", "Female"));
         character.add(new CharacterModel(R.drawable.monicca, "Monicca", "Female"));
         character.add(new CharacterModel(R.drawable.alisson, "Alisson", "Female"));
         character.add(new CharacterModel(R.drawable.angel, "Angel", "Female"));
         character.add(new CharacterModel(R.drawable.bianca, "Bianca", "Female"));
         character.add(new CharacterModel(R.drawable.bryan, "Bryan", "Male"));
+        character.add(new CharacterModel(R.drawable.albert, "Albert", "Male"));
         character.add(new CharacterModel(R.drawable.caleb, "Caleb", "Male"));
         character.add(new CharacterModel(R.drawable.devin, "Devin", "Male"));
         character.add(new CharacterModel(R.drawable.christian, "Christian", "Male"));
         character.add(new CharacterModel(R.drawable.michael, "Michael", "Male"));
         character.add(new CharacterModel(R.drawable.cherry, "Cherry", "Female"));
+        character.add(new CharacterModel(R.drawable.joyce, "Joyce", "Female"));
         character.add(new CharacterModel(R.drawable.fatima, "Fatima", "Female"));
         character.add(new CharacterModel(R.drawable.selena, "Selena", "Female"));
         character.add(new CharacterModel(R.drawable.francis, "Francis", "Female"));
@@ -172,17 +177,20 @@ public class LineupActivity extends AppCompatActivity {
         character.add(new CharacterModel(R.drawable.frank, "Frank", "Male"));
         character.add(new CharacterModel(R.drawable.john, "John", "Male"));
         character.add(new CharacterModel(R.drawable.juliet, "Juliet", "Female"));
+        character.add(new CharacterModel(R.drawable.russell, "Russell", "Female"));
         character.add(new CharacterModel(R.drawable.kimberly, "Kimberly", "Female"));
         character.add(new CharacterModel(R.drawable.kyle, "Kyle", "Male"));
         character.add(new CharacterModel(R.drawable.lee, "Lee", "Male"));
         character.add(new CharacterModel(R.drawable.oliver, "Oliver", "Male"));
         character.add(new CharacterModel(R.drawable.liam, "Liam", "Male"));
+        character.add(new CharacterModel(R.drawable.kai, "Kai", "Male"));
         character.add(new CharacterModel(R.drawable.steven, "Steven", "Male"));
         character.add(new CharacterModel(R.drawable.jonathan, "Jonathan", "Male"));
         character.add(new CharacterModel(R.drawable.louise, "Louise", "Female"));
         character.add(new CharacterModel(R.drawable.merry, "Merry", "Female"));
         character.add(new CharacterModel(R.drawable.nicolas, "Nicolas", "Male"));
         character.add(new CharacterModel(R.drawable.rachel, "Rachel", "Female"));
+        character.add(new CharacterModel(R.drawable.clarisse, "Clarisse", "Female"));
         character.add(new CharacterModel(R.drawable.sarah, "Sarah", "Female"));
         character.add(new CharacterModel(R.drawable.sasa, "Sasa", "Female"));
         character.add(new CharacterModel(R.drawable.sofia, "Sofia", "Female"));
@@ -191,7 +199,9 @@ public class LineupActivity extends AppCompatActivity {
         character.add(new CharacterModel(R.drawable.judith, "Judith", "Female"));
         character.add(new CharacterModel(R.drawable.venus, "Venus", "Female"));
         character.add(new CharacterModel(R.drawable.vince, "Vince", "Male"));
+        character.add(new CharacterModel(R.drawable.william, "William", "Male"));
         character.add(new CharacterModel(R.drawable.ryan, "Ryan", "Male"));
+        character.add(new CharacterModel(R.drawable.aldrin, "Aldrin", "Male"));
         character.add(new CharacterModel(R.drawable.raymond, "Raymond", "Male"));
         character.add(new CharacterModel(R.drawable.andrei, "Andrei", "Male"));
         character.add(new CharacterModel(R.drawable.elize, "Elize", "Female"));
@@ -214,6 +224,7 @@ public class LineupActivity extends AppCompatActivity {
         character.add(new CharacterModel(R.drawable.mitch, "Mitch", "Female"));
         character.add(new CharacterModel(R.drawable.angelo, "Angelo", "Male"));
         character.add(new CharacterModel(R.drawable.ian, "Ian", "Male"));
+        character.add(new CharacterModel(R.drawable.isam, "Isam", "Male"));
         character.add(new CharacterModel(R.drawable.katherine, "Katherine", "Female"));
         character.add(new CharacterModel(R.drawable.daisy, "Daisy", "Female"));
         character.add(new CharacterModel(R.drawable.kenneth, "Kenneth", "Male"));
