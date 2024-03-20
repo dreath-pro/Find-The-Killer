@@ -1,7 +1,12 @@
 package com.example.findthekiller.fragment;
 
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -19,6 +24,9 @@ public class KilledFragment extends Fragment {
     Button backButton;
 
     private PlayerModel selectedPlayer;
+    private MediaPlayer deathSound;
+    private AudioManager audioManager;
+    private Context context;
 
     public KilledFragment(PlayerModel selectedPlayer)
     {
@@ -67,6 +75,26 @@ public class KilledFragment extends Fragment {
         }
 
         return playerName + apostrophePlacement + " corpse has been found!";
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        this.context = context;
+
+        deathSound = MediaPlayer.create(context, R.raw.tragedy);
+        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        deathSound.start();
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        if(deathSound != null)
+        {
+            deathSound.release();
+        }
     }
 
     private void backToGame()

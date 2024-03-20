@@ -1,7 +1,11 @@
 package com.example.findthekiller.fragment;
 
+import static androidx.core.content.ContextCompat.getSystemService;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -33,6 +37,8 @@ public class AftergameFragment extends Fragment {
     private Context context;
     private boolean isWinning;
     private int failPrompt, failText, failBackground;
+    private MediaPlayer killerSound;
+    private AudioManager audioManager;
 
     public AftergameFragment(ArrayList<PlayerModel> killerLists, boolean isWinning)
     {
@@ -79,6 +85,10 @@ public class AftergameFragment extends Fragment {
         failPrompt = ContextCompat.getColor(context, R.color.failPrompt);
         failText = ContextCompat.getColor(context, R.color.failText);
         failBackground = ContextCompat.getColor(context, R.color.failBackground);
+
+        killerSound = MediaPlayer.create(context, R.raw.death);
+        audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        killerSound.start();
     }
 
     private void setFailColor()
@@ -86,6 +96,16 @@ public class AftergameFragment extends Fragment {
         aftergamePrompt.setTextColor(failPrompt);
         killerText.setTextColor(failText);
         aftergameLayout.setBackgroundColor(failBackground);
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        if(killerSound != null)
+        {
+            killerSound.release();
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -103,7 +123,6 @@ public class AftergameFragment extends Fragment {
         }else
         {
             aftergamePrompt.setText("You failed!");
-
             setFailColor();
         }
 
@@ -129,7 +148,7 @@ public class AftergameFragment extends Fragment {
             }
         }else
         {
-            killerText.setText("The killers is " + killerLists.get(0).getName());
+            killerText.setText("The killer is " + killerLists.get(0).getName());
         }
     }
 }
