@@ -176,20 +176,10 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 componentActivation(false);
                 killerMove();
-                componentActivation(true);
 
-                updatePlayerCount(true);
-                if (survivorCount <= 1) {
-                    //triggers lose fragment
-                    componentActivation(false);
-                    afterGame(false);
-                } else if (killerCount == 0) {
-                    //triggers win fragment
-                    componentActivation(false);
-                    afterGame(true);
+                if (survivorCount > 1 && killerCount > 0) {
+                    componentActivation(true);
                 }
-
-                interrogationAdapter.notifyItemChanged(selectedIndex);
             }
         });
 
@@ -571,17 +561,26 @@ public class GameActivity extends AppCompatActivity {
             for (int i = 0; i <= playerModels.size() - 1; i++) {
                 if (playerModels.get(i).isValid()) {
                     if (survivorCount <= 1) {
+                        componentActivation(false);
                         afterGame(false);
-                    } else {
+
+                        isReported = true;
+                        break;
+                    } else if(killerCount == 0) {
+                        componentActivation(false);
+                        afterGame(true);
+
+                        isReported = true;
+                        break;
+                    }else
+                    {
                         playerModels.get(i).setEliminated(true);
                         interrogationAdapter.notifyItemChanged(selectedIndex);
-
-                        updatePlayerCount(true);
-                        changeFocusChat();
                         showPlayerKilled(playerModels.get(i));
-                        isReported = true;
+                        changeFocusChat();
+                        updatePlayerCount(true);
 
-                        Toast.makeText(this, playerModels.get(i).getName() + "'s corpse been found!", Toast.LENGTH_SHORT).show();
+                        isReported = true;
                         break;
                     }
                 }
