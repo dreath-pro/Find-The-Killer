@@ -556,6 +556,12 @@ public class GameActivity extends AppCompatActivity {
     private void killerMove() {
         boolean isReported = false;
 
+        for(int i = 0; i <= playerModels.size() - 1; i++)
+        {
+            conversation.get(i).clear();
+            conversation.get(i).append(new MessageModel(playerModels.get(i)).selectGreeting());
+        }
+
         while (!isReported) {
             assignSurvivors();
             isValidPrey(true);
