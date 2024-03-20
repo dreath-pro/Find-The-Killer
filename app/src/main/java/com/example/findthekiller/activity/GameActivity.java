@@ -120,10 +120,7 @@ public class GameActivity extends AppCompatActivity {
         chatBox.setText(conversation.get(0));
         updatePlayerCount(false);
         initializeRoom();
-
-        componentActivation(false);
         killerMove();
-        componentActivation(true);
 
         inspectButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,12 +171,7 @@ public class GameActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                componentActivation(false);
                 killerMove();
-
-                if (survivorCount > 1 && killerCount > 0) {
-                    componentActivation(true);
-                }
             }
         });
 
@@ -544,6 +536,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void killerMove() {
+        componentActivation(false);
         boolean isReported = false;
 
         for(int i = 0; i <= playerModels.size() - 1; i++)
@@ -560,29 +553,27 @@ public class GameActivity extends AppCompatActivity {
 
             for (int i = 0; i <= playerModels.size() - 1; i++) {
                 if (playerModels.get(i).isValid()) {
-                    if (survivorCount <= 1) {
-                        componentActivation(false);
-                        afterGame(false);
+                    playerModels.get(i).setEliminated(true);
+                    interrogationAdapter.notifyItemChanged(selectedIndex);
+                    changeFocusChat();
+                    updatePlayerCount(true);
 
+                    if (survivorCount <= 1) {
+                        afterGame(false);
                         isReported = true;
                         break;
                     } else if(killerCount == 0) {
-                        componentActivation(false);
                         afterGame(true);
-
                         isReported = true;
                         break;
                     }else
                     {
-                        playerModels.get(i).setEliminated(true);
-                        interrogationAdapter.notifyItemChanged(selectedIndex);
                         showPlayerKilled(playerModels.get(i));
-                        changeFocusChat();
-                        updatePlayerCount(true);
-
-                        isReported = true;
-                        break;
+                        componentActivation(true);
                     }
+
+                    isReported = true;
+                    break;
                 }
             }
         }
